@@ -1,457 +1,963 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="CreatoCrew — Creative & Digital Marketing. Strategy, design, content, ads, branding, and web." />
-  <title>CreatoCrew — Creative & Digital Marketing</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CreatoCrew – Make Your Brand Impossible to Ignore</title>
 
-  <style>
-    :root{
-      --bg:#0b0b12;
-      --card:#101021;
-      --text:#f5f6ff;
-      --muted:rgba(245,246,255,.72);
-      --bd:rgba(255,255,255,.10);
-      --bd2:rgba(255,255,255,.16);
-      --accent:#a855f7;
-      --accent2:#60a5fa;
-      --radius:18px;
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(1000px 600px at 10% 0%, rgba(168,85,247,.25), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(96,165,250,.20), transparent 55%),
-        linear-gradient(180deg, #070711, #0b0b12);
-      color:var(--text);
-    }
-    a{color:inherit}
-    .wrap{max-width:1150px;margin:0 auto;padding:22px 18px 60px}
-    .topbar{
-      position:sticky; top:0; z-index:999;
-      backdrop-filter: blur(10px);
-      background: rgba(11,11,18,.65);
-      border-bottom:1px solid var(--bd);
-    }
-    .topbar-inner{
-      max-width:1150px; margin:0 auto;
-      padding:12px 18px;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px; min-width:220px;
-      text-decoration:none;
-    }
-    .brand img{height:38px;width:auto;display:block}
-    .brand .name{font-weight:800; letter-spacing:.2px}
-    .brand .tag{font-size:12px;color:var(--muted); margin-top:2px}
-    nav{
-      display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
-    }
-    nav a{
-      font-size:13px; color:var(--muted);
-      text-decoration:none;
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid transparent;
-    }
-    nav a:hover{border-color:var(--bd2); color:var(--text)}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px;
-      border-radius:14px;
-      border:1px solid var(--bd2);
-      background:rgba(255,255,255,.03);
-      text-decoration:none;
-      font-weight:650;
-      font-size:14px;
-      cursor:pointer;
-      transition:transform .08s ease, background .15s ease, border-color .15s ease;
-      user-select:none;
-    }
-    .btn:hover{background:rgba(255,255,255,.06)}
-    .btn:active{transform:translateY(1px)}
-    .btn.primary{
-      border-color: transparent;
-      background: linear-gradient(135deg, rgba(168,85,247,.95), rgba(96,165,250,.85));
-      color:#0b0b12;
-    }
+<style>
+/* =========================
+   THEME
+========================= */
+:root{
+  --bg:#05050a;
+  --text:rgba(255,255,255,.92);
+  --muted:rgba(235,235,255,.72);
 
-    .hero{
-      margin-top:20px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:16px;
-      align-items:stretch;
-    }
-    .card{
-      border:1px solid var(--bd);
-      border-radius:var(--radius);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hero-main{padding:22px}
-    .kicker{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:7px 10px;
-      border:1px solid var(--bd2);
-      border-radius:999px;
-      font-size:12px;
-      color:var(--muted);
-      background: rgba(255,255,255,.03);
-    }
-    h1{margin:14px 0 10px; font-size:40px; line-height:1.05}
-    .lead{margin:0 0 16px; color:var(--muted); font-size:15px; max-width:62ch}
-    .hero-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-    .mini{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top:16px;
-    }
-    .mini .pill{
-      border:1px solid var(--bd);
-      border-radius:14px;
-      padding:10px 12px;
-      background: rgba(255,255,255,.02);
-      color:var(--muted);
-      font-size:13px;
-    }
-    .hero-side{display:flex; flex-direction:column;}
-    .hero-image{position:relative; min-height: 260px; background:#0a0a14;}
-    .hero-image img{
-      width:100%; height:100%; object-fit:cover; display:block;
-      filter:saturate(1.05) contrast(1.05);
-    }
-    .hero-image::after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(11,11,18,.10), rgba(11,11,18,.88));
-    }
-    .hero-side-inner{padding:18px}
-    .quote{margin:0; color:var(--muted); font-size:14px; line-height:1.55;}
+  --glass:rgba(255,255,255,.075);
+  --stroke:rgba(255,255,255,.14);
 
-    .section{margin-top:24px}
-    .section h2{margin:0 0 12px; font-size:20px; letter-spacing:.2px;}
-    .section .sub{margin:-6px 0 14px; color:var(--muted); font-size:13px;}
+  --p1:rgba(140,0,255,.40);
+  --p2:rgba(180,70,255,.24);
+  --p3:rgba(110,0,220,.18);
 
-    .logo-strip{
-      display:flex; gap:12px; overflow-x:auto;
-      padding:12px;
-      border-radius:var(--radius);
-      border:1px solid var(--bd);
-      background: rgba(255,255,255,.02);
-    }
-    .logo-strip img{
-      height:46px; width:auto;
-      padding:10px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      flex:0 0 auto;
-      object-fit:contain;
-    }
+  --shadow:rgba(0,0,0,.62);
 
-    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;}
-    @media (max-width: 980px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns: repeat(2, 1fr)}
-      h1{font-size:36px}
-    }
-    @media (max-width: 560px){
-      .grid{grid-template-columns: 1fr}
-      h1{font-size:32px}
-      nav{display:none}
-    }
+  --container: 1200px;
+  --radius: 22px;
+}
 
-    .proj{padding:14px}
-    .proj a{text-decoration:none; display:block}
-    .thumb{
-      width:100%;
-      height:220px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.20);
-      overflow:hidden;
-    }
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .proj h3{margin:10px 0 4px; font-size:16px}
-    .proj p{margin:0; color:var(--muted); font-size:13px}
-    .proj .link{margin-top:10px; color:rgba(255,255,255,.86); font-weight:650}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:
+    radial-gradient(900px 700px at 18% 18%, rgba(140,0,255,.18), transparent 58%),
+    radial-gradient(900px 700px at 85% 28%, rgba(160,90,255,.14), transparent 55%),
+    radial-gradient(1200px 900px at 55% 110%, rgba(90,0,180,.10), transparent 62%),
+    var(--bg);
+}
 
-    .services{display:grid; grid-template-columns: repeat(2, 1fr); gap:14px;}
-    @media (max-width: 820px){ .services{grid-template-columns:1fr} }
-    .service-card{padding:16px}
-    .service-card h3{margin:0 0 6px; font-size:16px}
-    .service-card p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
-    .service-card p + p{margin-top:10px}
+a{color:inherit}
+.container{max-width:var(--container); margin:0 auto; padding:0 18px}
+.section{padding:72px 0}
+.kicker{letter-spacing:.28em; color:rgba(255,255,255,.65); font-size:13px; text-transform:uppercase}
 
-    .cta{
-      margin-top:26px;
-      padding:18px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
-      align-items:center;
-    }
-    @media (max-width: 900px){ .cta{grid-template-columns:1fr} }
-    .cta h2{margin:0 0 8px; font-size:22px}
-    .cta p{margin:0; color:var(--muted); line-height:1.6}
-    .contact{
-      display:grid; gap:8px; padding:14px;
-      border-radius:16px; border:1px solid var(--bd);
-      background: rgba(255,255,255,.02);
-    }
-    .contact div{color:rgba(245,246,255,.88); font-size:14px}
-    .foot{margin-top:18px; color:rgba(245,246,255,.55); font-size:12px; text-align:center;}
-  </style>
+/* =========================
+   TOP NAV (GLASS)
+========================= */
+header{
+  position:fixed; inset:0 0 auto 0;
+  z-index:50;
+  background:rgba(0,0,0,.35);
+  backdrop-filter: blur(16px) saturate(150%);
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+.nav{
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+  text-decoration:none;
+}
+.brand img{height:34px; width:auto}
+.navlinks{
+  display:flex; align-items:center; gap:18px;
+}
+.navlinks a{
+  text-decoration:none;
+  color:rgba(255,255,255,.78);
+  font-size:14px;
+}
+.navlinks a:hover{color:#fff}
+.menuBtn{
+  display:none;
+  width:42px;height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  backdrop-filter: blur(14px);
+}
+
+/* mobile nav drawer */
+.drawer{
+  display:none;
+  position:fixed; top:64px; left:0; right:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter: blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.drawer a{
+  display:block;
+  padding:14px 18px;
+  text-decoration:none;
+  color:rgba(255,255,255,.86);
+  border-top:1px solid rgba(255,255,255,.07);
+}
+
+/* =========================
+   HERO
+========================= */
+.hero{
+  padding-top:92px;
+  padding-bottom:34px;
+}
+.heroGrid{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:26px;
+  align-items:stretch;
+  min-height:520px;
+}
+
+.heroLeft{
+  border-radius:var(--radius);
+  padding:34px 28px;
+  position:relative;
+}
+
+.heroTitle{
+  font-size:52px;
+  line-height:1.05;
+  margin:0 0 10px 0;
+  letter-spacing:-.02em;
+}
+.heroTitle .line2{
+  display:block;
+}
+.typeCursor{
+  display:inline-block;
+  width:10px;
+  margin-left:6px;
+  border-left:2px solid rgba(255,255,255,.75);
+  animation:blink 1s steps(2,end) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+
+.heroSub{
+  max-width:56ch;
+  color:var(--muted);
+  margin:14px 0 18px 0;
+  line-height:1.65;
+  font-size:15px;
+}
+
+/* right media block */
+.heroRight{
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  box-shadow: 0 34px 120px rgba(0,0,0,.70);
+  background:rgba(255,255,255,.03);
+}
+
+/* video/gif */
+.heroRight video,
+.heroRight img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* the "glass fade" like your mock (video visible on right, left is darker) */
+.heroRight::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(5,5,10,.92) 0%,
+      rgba(5,5,10,.62) 40%,
+      rgba(5,5,10,.12) 78%,
+      rgba(5,5,10,0) 100%);
+  pointer-events:none;
+}
+
+/* optional shape overlay (you said 0% opacity) — kept but harmless */
+.heroRight::after{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.08);
+  opacity:0; /* you asked 0% opacity */
+  pointer-events:none;
+}
+
+/* =========================
+   LIQUID GLASS PILL (Hover + Tap)
+========================= */
+@property --spin { syntax:"<angle>"; inherits:false; initial-value:0deg; }
+@property --spin2{ syntax:"<angle>"; inherits:false; initial-value:0deg; }
+
+@keyframes sheenRotate{ to { --spin: 360deg; } }
+@keyframes prismRotate{ to { --spin2: -360deg; } }
+@keyframes liquidDrift{
+  0%{ transform:translateX(-10px) translateY(0) scale(1); }
+  50%{ transform:translateX(12px) translateY(-8px) scale(1.02); }
+  100%{ transform:translateX(-10px) translateY(0) scale(1); }
+}
+@keyframes noiseShift{ to{ background-position:160px 120px; } }
+
+.pillStack{display:flex; flex-direction:column; gap:14px; margin-top:18px}
+
+.service-pill{
+  --r-default:999px;
+  --r-open:28px;
+  --r-current:var(--r-default);
+
+  position:relative;
+  width:100%;
+  padding:14px 18px;
+  border-radius:var(--r-current);
+  overflow:hidden;
+  cursor:pointer;
+  user-select:none;
+
+  max-height:54px;
+
+  transition:
+    max-height 1.05s cubic-bezier(.16,1,.3,1),
+    border-radius .65s cubic-bezier(.2,1,.2,1),
+    transform .28s ease,
+    box-shadow .7s ease;
+
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.11),
+    rgba(255,255,255,.05) 45%,
+    rgba(140,0,255,.055) 85%);
+
+  backdrop-filter: blur(26px) saturate(165%) contrast(1.05);
+
+  box-shadow:
+    0 18px 60px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.20),
+    inset 0 -14px 28px rgba(0,0,0,.34);
+
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.service-pill::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 55%),
+    linear-gradient(90deg, rgba(180,70,255,.10), rgba(255,255,255,0) 60%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.12);
+  opacity:.98;
+}
+
+.service-pill::after{
+  content:"";
+  position:absolute;
+  inset:-80px -90px auto -90px;
+  height:165%;
+  border-radius:999px;
+  pointer-events:none;
+  background:radial-gradient(closest-side at 28% 18%,
+    rgba(255,255,255,.32),
+    rgba(255,255,255,.12) 42%,
+    rgba(255,255,255,0) 74%);
+  filter:blur(10px);
+  opacity:.92;
+}
+
+.service-pill .refraction{
+  position:absolute; inset:-10px;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:.22;
+  filter:url(#lg-distort);
+  mix-blend-mode:soft-light;
+  background:
+    radial-gradient(150px 100px at 26% 36%, rgba(255,255,255,.30), transparent 70%),
+    radial-gradient(210px 150px at 74% 62%, rgba(140,0,255,.20), transparent 72%),
+    radial-gradient(170px 120px at 55% 22%, rgba(255,255,255,.14), transparent 72%);
+}
+
+.service-pill .sheen{
+  position:absolute; inset:-100px -160px;
+  border-radius:999px;
+  pointer-events:none;
+  opacity:.58;
+  mix-blend-mode:screen;
+  filter:blur(14px);
+  background:
+    radial-gradient(closest-side at 20% 60%, rgba(255,255,255,.12), transparent 62%),
+    radial-gradient(closest-side at 80% 35%, rgba(0,0,0,.18), transparent 68%),
+    conic-gradient(from var(--spin) at 50% 50%,
+      rgba(255,255,255,.08),
+      var(--p1),
+      rgba(255,255,255,.06),
+      var(--p2),
+      rgba(255,255,255,.05),
+      var(--p3),
+      rgba(255,255,255,.08));
+  animation:sheenRotate 9s linear infinite;
+}
+
+.service-pill .prism{
+  position:absolute; inset:-120px -200px;
+  border-radius:999px;
+  pointer-events:none;
+  opacity:.28;
+  mix-blend-mode:color-dodge;
+  filter:blur(18px);
+  background:conic-gradient(from var(--spin2) at 50% 50%,
+    rgba(0,255,255,.10),
+    rgba(255,0,255,.10),
+    rgba(0,120,255,.10),
+    rgba(255,255,255,.06),
+    rgba(0,255,255,.10));
+  animation:prismRotate 10.5s linear infinite;
+}
+
+.service-pill .liquid{
+  position:absolute; inset:-90px -140px;
+  border-radius:999px;
+  pointer-events:none;
+  opacity:.30;
+  mix-blend-mode:overlay;
+  filter:blur(18px);
+  background:
+    radial-gradient(closest-side at 18% 70%, rgba(255,255,255,.16), transparent 62%),
+    radial-gradient(closest-side at 70% 42%, rgba(255,255,255,.10), transparent 65%),
+    radial-gradient(closest-side at 60% 90%, rgba(0,0,0,.22), transparent 70%);
+  animation:liquidDrift 8.8s ease-in-out infinite;
+}
+
+.service-pill .noise{
+  position:absolute; inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:.10;
+  mix-blend-mode:overlay;
+  background-image:repeating-linear-gradient(0deg,
+    rgba(255,255,255,.10) 0px,
+    rgba(255,255,255,.10) 1px,
+    rgba(255,255,255,0) 2px,
+    rgba(255,255,255,0) 5px);
+  animation:noiseShift 7s linear infinite;
+}
+
+.service-pill__top, .service-pill__body{ position:relative; z-index:2; }
+.service-pill__top{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.service-pill__title{
+  font-size:16px;
+  font-weight:650;
+  letter-spacing:.2px;
+  text-shadow:0 1px 0 rgba(0,0,0,.25);
+}
+
+.service-pill__icon{
+  width:30px; height:30px;
+  display:grid; place-items:center;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -10px 16px rgba(0,0,0,.28),
+    0 14px 28px rgba(0,0,0,.40);
+  font-size:20px;
+  color:rgba(255,255,255,.95);
+  transform:rotate(0deg);
+  transition:transform 1.15s cubic-bezier(.16,1,.3,1);
+  transition-delay:.15s;
+}
+
+.service-pill__body{
+  margin-top:10px;
+  font-size:13px;
+  line-height:1.6;
+  color:var(--muted);
+
+  opacity:0;
+  transform:translateY(12px);
+  filter:blur(2px);
+
+  transition:
+    opacity .65s ease,
+    transform 1.05s cubic-bezier(.16,1,.3,1),
+    filter 1.05s ease;
+}
+
+/* open state (hover + tap) */
+.service-pill:hover,
+.service-pill:focus-visible,
+.service-pill.is-open{
+  --r-current:var(--r-open);
+  max-height:180px;
+  transform:translateY(-1px);
+  box-shadow:
+    0 26px 88px rgba(0,0,0,.70),
+    0 0 0 1px rgba(180,70,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.24),
+    inset 0 -16px 34px rgba(0,0,0,.34);
+}
+
+.service-pill:hover .service-pill__body,
+.service-pill:focus-visible .service-pill__body,
+.service-pill.is-open .service-pill__body{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+  transition-delay:.26s;
+}
+
+.service-pill:hover .service-pill__icon,
+.service-pill:focus-visible .service-pill__icon,
+.service-pill.is-open .service-pill__icon{
+  transform:rotate(45deg);
+  transition-delay:.28s;
+}
+
+.service-pill:hover .sheen,
+.service-pill.is-open .sheen{ animation-duration:5.8s; opacity:.74; }
+.service-pill:hover .prism,
+.service-pill.is-open .prism{ opacity:.40; }
+.service-pill:hover .refraction,
+.service-pill.is-open .refraction{ opacity:.28; }
+
+.service-pill:focus-visible{
+  outline:2px solid rgba(180,70,255,.25);
+  outline-offset:4px;
+}
+
+/* =========================
+   SECTION CARDS
+========================= */
+.grid2{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:18px;
+}
+.card{
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 70px rgba(0,0,0,.55);
+  padding:22px;
+}
+.card p{color:var(--muted); line-height:1.65; margin:0}
+
+/* =========================
+   CLIENTS MARQUEE
+========================= */
+.clientsWrap{
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  backdrop-filter: blur(18px);
+  overflow:hidden;
+  padding:18px 0;
+}
+.marquee{
+  display:flex;
+  gap:34px;
+  align-items:center;
+  width:max-content;
+  animation:marquee 55s linear infinite;
+  padding:0 18px;
+}
+@keyframes marquee{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+.clientLogo{
+  height:54px;
+  width:auto;
+  opacity:.88;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+}
+
+/* =========================
+   WORKS SLIDER
+========================= */
+.worksHead{
+  display:flex; align-items:end; justify-content:space-between; gap:16px;
+}
+.slider{
+  margin-top:16px;
+  position:relative;
+}
+.track{
+  display:flex;
+  gap:16px;
+  overflow:auto;
+  scroll-snap-type:x mandatory;
+  padding:6px 2px 10px;
+}
+.track::-webkit-scrollbar{height:10px}
+.track::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12); border-radius:999px}
+.workCard{
+  scroll-snap-align:start;
+  min-width: 320px;
+  max-width: 320px;
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  overflow:hidden;
+  text-decoration:none;
+  box-shadow: 0 18px 70px rgba(0,0,0,.55);
+}
+.thumb{
+  height:190px;
+  background:
+    radial-gradient(700px 220px at 20% 20%, rgba(140,0,255,.24), transparent 55%),
+    radial-gradient(700px 220px at 90% 80%, rgba(180,70,255,.18), transparent 60%),
+    rgba(0,0,0,.25);
+}
+.thumb img{width:100%; height:100%; object-fit:cover; display:block}
+.workBody{padding:16px}
+.workTitle{font-weight:700; margin:0 0 6px 0}
+.workMeta{margin:0; color:var(--muted); font-size:13px; line-height:1.5}
+
+.arrowRow{
+  display:flex; gap:10px;
+}
+.arrowBtn{
+  width:42px; height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  cursor:pointer;
+  backdrop-filter: blur(14px);
+}
+.arrowBtn:hover{background:rgba(255,255,255,.10)}
+
+/* =========================
+   QUOTE CTA
+========================= */
+.quoteRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.quotePill{
+  display:flex; align-items:center; gap:10px;
+  text-decoration:none;
+  padding:14px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(135deg, rgba(140,0,255,.28), rgba(255,255,255,.06));
+  box-shadow: 0 18px 70px rgba(0,0,0,.55);
+  backdrop-filter: blur(18px) saturate(160%);
+}
+.quotePill:hover{filter:brightness(1.05)}
+.quoteIcon{
+  width:32px;height:32px;
+  border-radius:999px;
+  display:grid; place-items:center;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.10);
+}
+.smallNote{color:var(--muted); font-size:13px}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+  padding:42px 0;
+  border-top:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.25);
+  backdrop-filter: blur(10px);
+}
+.footerGrid{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap:18px;
+}
+.footerTitle{font-weight:750; margin:0 0 10px 0}
+.footerList{margin:0; padding:0; list-style:none; color:var(--muted); line-height:1.9; font-size:14px}
+.copy{
+  margin-top:18px;
+  color:rgba(255,255,255,.55);
+  font-size:13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 980px){
+  .heroGrid{grid-template-columns:1fr; min-height:auto}
+  .heroTitle{font-size:44px}
+  .heroRight{min-height:320px}
+  .grid2{grid-template-columns:1fr}
+  .footerGrid{grid-template-columns:1fr}
+}
+@media (max-width: 760px){
+  .navlinks{display:none}
+  .menuBtn{display:inline-grid; place-items:center}
+  .drawer.show{display:block}
+}
+</style>
 </head>
 
 <body>
 
-  <div class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="#top">
-        <img src="assets/brand/logo.png" alt="CreatoCrew Logo">
-        <div>
-          <div class="name">CreatoCrew</div>
-          <div class="tag">Creative & Digital Marketing</div>
-        </div>
-      </a>
+<!-- SVG FILTER needed for refraction -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0">
+  <filter id="lg-distort" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="1" seed="12" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
 
-      <nav>
-        <a href="#about">About</a>
-        <a href="#clients">Clients</a>
-        <a href="#projects">Projects</a>
-        <a href="#creative">Creative</a>
-        <a href="#marketing">Marketing</a>
-        <a href="#branding">Branding</a>
-      </nav>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <img src="assets/images/logo.png" alt="CreatoCrew logo" />
+    </a>
 
-      <div class="actions">
-        <a class="btn" href="docs/brochure.pdf" target="_blank" rel="noopener">Brochure (PDF)</a>
-        <a class="btn primary"
-           href="https://wa.me/918281321607?text=Hi%2C%20I%E2%80%99m%20interested%20in%20your%20services.%20Can%20I%20get%20a%20quote%3F"
-           target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </div>
+    <nav class="navlinks" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#works">Works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="menuBtn" id="menuBtn" aria-label="Open menu">≡</button>
   </div>
 
-  <div id="top" class="wrap">
+  <div class="drawer" id="drawer">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#works">Works</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
 
-    <div class="hero">
-      <div class="card hero-main">
-        <div class="kicker">Temporary launch site • Full website coming soon</div>
-        <h1>Make Your Brand Impossible to Ignore.</h1>
-        <p class="lead">
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container heroGrid">
+
+      <div class="heroLeft">
+        <h1 class="heroTitle">
+          Make Your Brand
+          <span class="line2"><span id="typeTarget"></span><span class="typeCursor"></span></span>
+        </h1>
+
+        <p class="heroSub">
+          CreatoCrew helps brands grow with smart strategy, thoughtful design, and effective execution —
+          with creatives that look premium and perform.
+        </p>
+
+        <!-- Liquid glass pills -->
+        <div class="pillStack" id="services">
+
+          <div class="service-pill" role="button" tabindex="0" aria-expanded="false">
+            <div class="refraction"></div><div class="sheen"></div><div class="prism"></div><div class="liquid"></div><div class="noise"></div>
+            <div class="service-pill__top">
+              <div class="service-pill__title">Creatives</div>
+              <div class="service-pill__icon" aria-hidden="true">+</div>
+            </div>
+            <div class="service-pill__body">
+              We guide your brand’s creative direction through industry trends, moment marketing, research,
+              and strong concepts—strengthening your social media presence and building trust and awareness.
+            </div>
+          </div>
+
+          <div class="service-pill" role="button" tabindex="0" aria-expanded="false">
+            <div class="refraction"></div><div class="sheen"></div><div class="prism"></div><div class="liquid"></div><div class="noise"></div>
+            <div class="service-pill__top">
+              <div class="service-pill__title">Digital Marketing</div>
+              <div class="service-pill__icon" aria-hidden="true">+</div>
+            </div>
+            <div class="service-pill__body">
+              We help your business grow online through social media management, creative content, paid ads,
+              SEO, web design, and Google Business support—working together to increase visibility and attract customers.
+            </div>
+          </div>
+
+          <div class="service-pill" role="button" tabindex="0" aria-expanded="false">
+            <div class="refraction"></div><div class="sheen"></div><div class="prism"></div><div class="liquid"></div><div class="noise"></div>
+            <div class="service-pill__top">
+              <div class="service-pill__title">Branding</div>
+              <div class="service-pill__icon" aria-hidden="true">+</div>
+            </div>
+            <div class="service-pill__body">
+              We create a clear and memorable identity for your business through strong design and consistent
+              brand communication—helping you stand out and build trust.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="heroRight" aria-label="Chess background video">
+        <!-- Use MP4 or replace with GIF as <img src="assets/video/chess.gif"> -->
+        <video autoplay muted loop playsinline>
+          <source src="assets/video/chess.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT + RECENT WORK (like your layout cards) -->
+  <section class="section">
+    <div class="container grid2">
+
+      <div class="card">
+        <div class="kicker">Recent Work</div>
+        <h2 style="margin:10px 0 10px">Featured Project</h2>
+        <p style="margin-bottom:14px">
+          Preview the latest brochure/brand work. Replace this with your final permalink anytime.
+        </p>
+        <a class="quotePill"
+           target="_blank"
+           rel="noopener"
+           href="https://www.behance.net/gallery/203416603/XandY-Learning-Brochure-JEEForce-Course-Kozhikode/modules/1154253553">
+          <span class="quoteIcon">↗</span>
+          <span>Open on Behance</span>
+        </a>
+        <p class="smallNote" style="margin-top:10px">Tip: later you can add a thumbnail image here: <b>assets/images/recent-work.jpg</b></p>
+      </div>
+
+      <div class="card">
+        <div class="kicker">About Us</div>
+        <h2 style="margin:10px 0 10px">CreatoCrew</h2>
+        <p>
           CreatoCrew is a creative and digital marketing team focused on helping brands grow with smart strategy,
-          thoughtful design, and effective execution.
-        </p>
-
-        <div class="hero-cta">
-          <a class="btn primary"
-             href="https://wa.me/918281321607?text=Hi%2C%20I%E2%80%99m%20interested%20in%20your%20services.%20Can%20I%20get%20a%20quote%3F"
-             target="_blank" rel="noopener">Get a Personalized Quote</a>
-
-          <a class="btn" href="#projects">See Recent Work</a>
-        </div>
-
-        <div class="mini">
-          <div class="pill">Design that looks premium.</div>
-          <div class="pill">Content that gets attention.</div>
-          <div class="pill">Strategy that drives leads.</div>
-          <div class="pill">Execution that stays consistent.</div>
-        </div>
-      </div>
-
-      <div class="card hero-side">
-        <div class="hero-image">
-          <img src="assets/hero/hero.png" alt="CreatoCrew hero">
-        </div>
-        <div class="hero-side-inner">
-          <p class="quote">
-            We guide your brand’s creative direction through industry trends, moment marketing, research,
-            and strong concept ideas. Our work strengthens your social media presence and helps build brand
-            trust and awareness.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div id="about" class="section">
-      <h2>About Us</h2>
-      <p class="sub">Clear positioning. Clean execution. Real growth.</p>
-
-      <div class="card" style="padding:16px;">
-        <p style="margin:0; color:var(--muted); line-height:1.7;">
-          We work with businesses that want to communicate clearly, look sharper, and reach the right audience.
+          thoughtful design, and effective execution.<br><br>
+          We work with businesses that want to communicate clearly, look sharper, and reach the right audience.<br><br>
           From social media to complete brand identity systems, we create content and campaigns that capture attention
-          and support real growth.
-          <br><br>
-          Our goal is simple: build work that strengthens your brand and connects it with people.
+          and support real growth.<br><br>
+          Our goal is to build work that strengthens your brand and connects it with people.
         </p>
       </div>
+
     </div>
+  </section>
 
-    <div id="clients" class="section">
-      <h2>Our Clients</h2>
-      <p class="sub">Replace the placeholder logos inside <code>assets/clients/</code></p>
+  <!-- CLIENTS -->
+  <section class="section">
+    <div class="container">
+      <div class="kicker" style="text-align:center">Our Clients</div>
+      <h2 style="text-align:center; margin:10px 0 18px">Trusted by brands</h2>
 
-      <div class="logo-strip">
-        <img src="assets/clients/client-1.png" alt="Client 1">
-        <img src="assets/clients/client-2.png" alt="Client 2">
-        <img src="assets/clients/client-3.png" alt="Client 3">
-        <img src="assets/clients/client-4.png" alt="Client 4">
+      <div class="clientsWrap">
+        <div class="marquee" id="marquee">
+          <!-- JS will inject client-1..23 twice for seamless loop -->
+        </div>
       </div>
+
+      <p class="smallNote" style="text-align:center; margin-top:10px">
+        Add your logos as: <b>assets/images/client-1.png</b> … <b>client-23.png</b>
+      </p>
     </div>
+  </section>
 
-    <div id="projects" class="section">
-      <h2>Recent Projects</h2>
-      <p class="sub">Replace thumbnails in <code>assets/projects/</code> and update the Instagram links.</p>
+  <!-- WORKS -->
+  <section class="section" id="works">
+    <div class="container">
 
-      <div class="grid">
-        <div class="card proj">
-          <a href="https://www.instagram.com/p/POST_ID_1/" target="_blank" rel="noopener">
-            <div class="thumb"><img src="assets/projects/project-1.png" alt="Project 1"></div>
-            <h3>Project Title 1</h3>
-            <p>Short note about this project (optional).</p>
-            <div class="link">View on Instagram →</div>
+      <div class="worksHead">
+        <div>
+          <div class="kicker">Our Works</div>
+          <h2 style="margin:10px 0 0">Projects</h2>
+        </div>
+
+        <div class="arrowRow">
+          <button class="arrowBtn" id="prevBtn" aria-label="Previous">‹</button>
+          <button class="arrowBtn" id="nextBtn" aria-label="Next">›</button>
+        </div>
+      </div>
+
+      <div class="slider">
+        <div class="track" id="workTrack">
+
+          <a class="workCard" target="_blank" rel="noopener"
+             href="https://www.behance.net/gallery/203401201/First-Steps-Schools-Brandfolio/modules/1154151037">
+            <div class="thumb">
+              <img src="assets/images/work-1.jpg" alt="" onerror="this.remove()">
+            </div>
+            <div class="workBody">
+              <p class="workTitle">First Steps Schools – Brandfolio</p>
+              <p class="workMeta">Brand identity & presentation</p>
+            </div>
           </a>
-        </div>
 
-        <div class="card proj">
-          <a href="https://www.instagram.com/p/POST_ID_2/" target="_blank" rel="noopener">
-            <div class="thumb"><img src="assets/projects/project-2.png" alt="Project 2"></div>
-            <h3>Project Title 2</h3>
-            <p>Short note about this project (optional).</p>
-            <div class="link">View on Instagram →</div>
+          <a class="workCard" target="_blank" rel="noopener"
+             href="https://www.behance.net/gallery/202975793/Dream-Fashions-Logo-Brand-Identity">
+            <div class="thumb">
+              <img src="assets/images/work-2.jpg" alt="" onerror="this.remove()">
+            </div>
+            <div class="workBody">
+              <p class="workTitle">Dream Fashions – Logo & Identity</p>
+              <p class="workMeta">Logo, brand system</p>
+            </div>
           </a>
-        </div>
 
-        <div class="card proj">
-          <a href="https://www.instagram.com/p/POST_ID_3/" target="_blank" rel="noopener">
-            <div class="thumb"><img src="assets/projects/project-3.png" alt="Project 3"></div>
-            <h3>Project Title 3</h3>
-            <p>Short note about this project (optional).</p>
-            <div class="link">View on Instagram →</div>
+          <a class="workCard" target="_blank" rel="noopener"
+             href="https://www.behance.net/gallery/202964729/Royalin-Sleeping-Solutions">
+            <div class="thumb">
+              <img src="assets/images/work-3.jpg" alt="" onerror="this.remove()">
+            </div>
+            <div class="workBody">
+              <p class="workTitle">Royalin – Sleeping Solutions</p>
+              <p class="workMeta">Brand & creatives</p>
+            </div>
           </a>
-        </div>
-      </div>
-    </div>
 
-    <div id="creative" class="section">
-      <h2>Creative Services</h2>
-      <div class="services">
-        <div class="card service-card">
-          <h3>Posters</h3>
-          <p>Attractive designs for daily posts, offers, trends, and awareness messages that quickly catch attention.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Carousels</h3>
-          <p>Multi-step slides that explain your message clearly and increase engagement.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Video Reels</h3>
-          <p>Short, high-impact reels and video content including product demos, awareness videos, marketing clips, anchor presentations, and voiceover visuals.</p>
-          <p>We handle shot planning, styling, and creative direction to ensure every visual fits your brand and delivers better reach, engagement, and leads.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Motion Graphics</h3>
-          <p>Animated elements, transitions, and explainers that bring ideas to life with energy and precision.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Copywriting</h3>
-          <p>Clear and effective text for your posts, ads, and marketing messages.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="marketing" class="section">
-      <h2>Digital Marketing</h2>
-      <div class="services">
-        <div class="card service-card">
-          <h3>Social Media Management</h3>
-          <p>We handle your daily posts, engagement, and page updates with a clear content calendar and a solid content strategy.</p>
-          <p>Everything is managed through Meta Business Suite, Ads Manager, and Google Ads Manager to ensure steady and effective growth.</p>
-        </div>
-        <div class="card service-card">
-          <h3>SEO / SEM</h3>
-          <p>Visibility that isn’t accidental. Search ranking, keyword optimisation, and targeted ad spend that brings real leads.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Web</h3>
-          <p>Clean, modern websites crafted with intuitive UI/UX and SEO-friendly structure.</p>
-          <p>Built for clarity, credibility, and high conversion, giving your users a seamless and effective experience.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Google Business Profile</h3>
-          <p>We create, optimize, and manage your Google Business listing with regular updates, maintenance, SEO-focused improvements, and ranking support.</p>
-          <p>Helps customers find you easily and increases local enquiries.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="branding" class="section">
-      <h2>Branding</h2>
-      <div class="services">
-        <div class="card service-card">
-          <h3>Brand Identity Design</h3>
-          <p>Complete identity including logo, visual symbols, color palette, and overall style, with clear brand guidelines for print, digital, and social media.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Brand Strategy</h3>
-          <p>Define how your brand should look and communicate across platforms, including messaging like your tagline, brand story, and key communication lines.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Stationery & Collateral</h3>
-          <p>Designs for business cards, letterheads, brochures, menus, and other essential branded materials.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Packaging Design</h3>
-          <p>Creative and attractive packaging that strengthens brand identity and improves customer experience.</p>
-        </div>
-        <div class="card service-card">
-          <h3>Rebranding</h3>
-          <p>Updating and refreshing your existing brand with a modern identity that matches your current goals.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="card cta">
-      <div>
-        <h2>Ready to take your brand forward?</h2>
-        <p>Let’s begin with <strong>CreatoCrew</strong>.</p>
-        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn primary"
-             href="https://wa.me/918281321607?text=Hi%2C%20I%E2%80%99m%20interested%20in%20your%20services.%20Can%20I%20get%20a%20quote%3F"
-             target="_blank" rel="noopener">Get a Personalized Quote</a>
-          <a class="btn" href="docs/brochure.pdf" target="_blank" rel="noopener">Open Brochure (PDF)</a>
         </div>
       </div>
 
-      <div class="contact">
-        <div>📞 +91 82813 21607</div>
-        <div>✉️ info@creatocrew.com</div>
-        <div>🌐 www.creatocrew.com</div>
-        <div>📍 Ernakulam, Kerala</div>
+    </div>
+  </section>
+
+  <!-- CONTACT / QUOTE -->
+  <section class="section" id="contact">
+    <div class="container card">
+      <div class="quoteRow">
+        <div>
+          <div class="kicker">Get a quote</div>
+          <h2 style="margin:10px 0 8px">Get a personalized quote that fits your goals.</h2>
+          <div class="smallNote">WhatsApp: +91 82813 21607 · Email: info@creatocrew.com · Web: www.creatocrew.com</div>
+        </div>
+
+        <a class="quotePill"
+           href="https://api.whatsapp.com/send/?phone=918281321607&text=Hi%2C+I%E2%80%99m+interested+in+your+services.+Could+you+please+share+a+quotation%3F&type=phone_number&app_absent=0"
+           target="_blank" rel="noopener">
+          <span class="quoteIcon">💬</span>
+          <span>WhatsApp Quote</span>
+        </a>
       </div>
     </div>
+  </section>
 
-    <div class="foot">
-      © <span id="year"></span> CreatoCrew. Temporary site for launch phase.
+</main>
+
+<footer>
+  <div class="container footerGrid">
+    <div>
+      <p class="footerTitle">CreatoCrew</p>
+      <ul class="footerList">
+        <li>Ready to take your brand forward.</li>
+        <li>Let’s begin with CreatoCrew.</li>
+      </ul>
     </div>
 
+    <div>
+      <p class="footerTitle">Services</p>
+      <ul class="footerList">
+        <li>Posters · Carousels</li>
+        <li>Video Reels · Motion Graphics</li>
+        <li>Copywriting</li>
+        <li>Social Media Management</li>
+        <li>SEO / SEM · Web</li>
+        <li>Google Business Profile</li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footerTitle">Contact</p>
+      <ul class="footerList">
+        <li>+91 82813 21607</li>
+        <li>info@creatocrew.com</li>
+        <li>www.creatocrew.com</li>
+        <li>@creatocrew (add your real handles)</li>
+      </ul>
+    </div>
   </div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <div class="container copy">© Copyright All rights reserved CreatoCrew 2025</div>
+</footer>
+
+<script>
+/* =========================
+   MOBILE NAV
+========================= */
+const menuBtn = document.getElementById("menuBtn");
+const drawer = document.getElementById("drawer");
+menuBtn?.addEventListener("click", ()=>{
+  drawer.classList.toggle("show");
+});
+drawer?.querySelectorAll("a").forEach(a=>{
+  a.addEventListener("click", ()=> drawer.classList.remove("show"));
+});
+
+/* =========================
+   TYPEWRITER (line 2 only)
+========================= */
+const typeTarget = document.getElementById("typeTarget");
+const phrase = "Impossible to Ignore!";
+let idx = 0;
+function type(){
+  if(!typeTarget) return;
+  typeTarget.textContent += phrase[idx] || "";
+  idx++;
+  if(idx <= phrase.length) setTimeout(type, 70);
+}
+type();
+
+/* =========================
+   PILLS: TAP/CLICK TOGGLE
+   (hover works on desktop; tap works on mobile)
+========================= */
+document.querySelectorAll(".service-pill").forEach(pill=>{
+  const toggle = () => {
+    const open = pill.classList.toggle("is-open");
+    pill.setAttribute("aria-expanded", open ? "true" : "false");
+  };
+  pill.addEventListener("click", toggle);
+  pill.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      toggle();
+    }
+  });
+});
+
+/* =========================
+   CLIENT LOGOS: inject client-1..23 twice for seamless marquee
+========================= */
+const marquee = document.getElementById("marquee");
+if(marquee){
+  const total = 23; // client-1.png ... client-23.png
+  const make = () => {
+    for(let i=1;i<=total;i++){
+      const img = document.createElement("img");
+      img.className = "clientLogo";
+      img.src = `assets/images/client-${i}.png`;
+      img.alt = `Client ${i}`;
+      img.onerror = () => img.remove(); // if missing, remove
+      marquee.appendChild(img);
+    }
+  };
+  make();
+  make(); // duplicate for smooth loop
+}
+
+/* =========================
+   WORKS SLIDER ARROWS
+========================= */
+const track = document.getElementById("workTrack");
+document.getElementById("prevBtn")?.addEventListener("click", ()=>{
+  track?.scrollBy({left:-340, behavior:"smooth"});
+});
+document.getElementById("nextBtn")?.addEventListener("click", ()=>{
+  track?.scrollBy({left:340, behavior:"smooth"});
+});
+</script>
+
 </body>
 </html>
