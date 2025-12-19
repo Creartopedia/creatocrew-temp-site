@@ -891,15 +891,15 @@ const drawer = document.getElementById("drawer");
 menuBtn?.addEventListener("click", ()=> drawer.classList.toggle("show"));
 drawer?.querySelectorAll("a").forEach(a=> a.addEventListener("click", ()=> drawer.classList.remove("show")));
 
-/* ✅ TYPEWRITER LOOP (every ~02 seconds) */
-<p class="headline">
-  <span>Make</span> 
-  <span>Your</span> 
-  <span>Brand</span> 
-  <span>Impossible</span> 
-  <span>to</span>
-  <span>Ignore</span> 
- </p> 
+/* ✅ TYPEWRITER LOOP (every ~10 seconds) */
+const typeTarget = document.getElementById("typeTarget");
+const fullText = "Make Your Brand Impossible to Ignore!";
+const TYPE_SPEED = 55;
+const DELETE_SPEED = 28;
+const HOLD_AFTER_TYPED = 900;
+const HOLD_AFTER_DELETED = 650;
+const LOOP_GAP = 10000; // your request: loop after every 10s
+
 let tIndex = 0;
 let deleting = false;
 let lastLoopStart = performance.now();
