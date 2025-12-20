@@ -29,8 +29,9 @@ body{
     radial-gradient(900px 700px at 85% 28%, rgba(160,90,255,.14), transparent 55%),
     radial-gradient(1200px 900px at 55% 110%, rgba(90,0,180,.10), transparent 62%),
     var(--bg);
+  overflow-x:hidden; /* mobile safety */
 }
-
+img, video, iframe{max-width:100%}
 a{color:inherit}
 .container{max-width:var(--container); margin:0 auto; padding:0 18px}
 .section{padding:72px 0}
@@ -75,6 +76,7 @@ header{
   text-decoration:none;
   color:rgba(255,255,255,.78);
   font-size:14px;
+  padding:10px 8px;
 }
 .navlinks a:hover{color:#fff}
 
@@ -92,21 +94,24 @@ header{
 .drawer{
   display:none;
   position:fixed; top:64px; left:0; right:0;
-  background:rgba(0,0,0,.55);
+  background:rgba(0,0,0,.62);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-bottom:1px solid rgba(255,255,255,.10);
 }
 .drawer a{
   display:block;
-  padding:14px 18px;
+  padding:16px 18px;
   text-decoration:none;
-  color:rgba(255,255,255,.86);
+  color:rgba(255,255,255,.90);
   border-top:1px solid rgba(255,255,255,.07);
+  font-size:15px;
 }
+.drawer a:active{background:rgba(255,255,255,.06)}
+.drawer.show{display:block}
 
 /* =========================
-   HERO (WHITE BORDER + CLIP)
+   HERO
 ========================= */
 .hero{padding-top:92px; padding-bottom:34px}
 
@@ -242,6 +247,7 @@ header{
     inset 0 -14px 28px rgba(0,0,0,.34);
 
   border:1px solid rgba(255,255,255,.10);
+  touch-action: manipulation;
 }
 .service-pill::before{
   content:"";
@@ -416,7 +422,7 @@ header{
 .learnMore:hover{ text-decoration:underline; }
 
 /* =========================
-   FLOATING SCROLL TEXTS (hero empty area)
+   FLOATING SCROLL TEXTS
 ========================= */
 .floatingTags{
   position:absolute;
@@ -584,49 +590,75 @@ header{
   gap:14px;
   flex-wrap:wrap;
 }
-.quotePill{
-  display:flex; align-items:center; gap:10px;
-  text-decoration:none;
-  padding:14px 18px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.14);
-  background:linear-gradient(135deg, rgba(140,0,255,.28), rgba(255,255,255,.06));
-  box-shadow: 0 18px 70px rgba(0,0,0,.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-}
-.quotePill:hover{filter:brightness(1.05)}
-.quoteIcon{
-  width:32px;height:32px;
-  border-radius:999px;
-  display:grid; place-items:center;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.10);
-}
 .smallNote{color:var(--muted); font-size:13px}
 
-.socialRow{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  margin-top:12px;
+/* WhatsApp pill (kept, but integrated properly) */
+.waCtaPill{
+  --pill-h: 52px;
+  --icon-size: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  height: var(--pill-h);
+  padding: 0 18px;
+  max-width: 240px;
+
+  border-radius: 999px;
+  white-space: nowrap;
+
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  color: #fff;
+  text-decoration: none;
+
+  background: linear-gradient(120deg,#6f3fc8,#4a1f7a,#9c5cff,#5b2d90);
+  background-size: 300% 300%;
+  animation: pillGradient 6s ease infinite;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.18);
+
+  border: 1px solid rgba(255,255,255,.12);
+  cursor: pointer;
+
+  transition: transform .18s ease, box-shadow .18s ease;
 }
-.socialRow a{
-  width:38px; height:38px;
-  border-radius:999px;
-  display:grid;
-  place-items:center;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  text-decoration:none;
+@keyframes pillGradient{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
-.socialRow a:hover{background:rgba(255,255,255,.10)}
-.socialRow img{
-  width:18px; height:18px;
-  display:block;
-  opacity:.92;
+.waCtaPill:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 36px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.22);
+}
+.waCtaPill:active{ transform: translateY(0); }
+.waIcon{
+  width: var(--icon-size);
+  height: var(--icon-size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  box-shadow: 0 6px 14px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.6);
+}
+.waIcon svg{
+  width: 18px;
+  height: 18px;
+  color: #25d366;
+  animation: waPulse 1.8s ease-in-out infinite;
+}
+@keyframes waPulse{
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.15); opacity: .85; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* =========================
@@ -645,7 +677,21 @@ footer{
   gap:18px;
 }
 .footerTitle{font-weight:750; margin:0 0 10px 0}
+.footerText{font-size:15px; line-height:1.7; color:#c9c9d6; margin:0}
 .footerList{margin:0; padding:0; list-style:none; color:var(--muted); line-height:1.9; font-size:14px}
+.footerList li{margin-bottom:10px}
+.footerList a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#c9c9d6;
+  text-decoration:none;
+}
+.footerList a:hover{color:#fff}
+.footerList img{width:18px;height:18px;opacity:.9}
+.footerSocial{display:flex; gap:14px; margin-top:18px}
+.footerSocial img{width:22px;height:22px;opacity:.8;transition:.25s ease}
+.footerSocial a:hover img{transform:scale(1.15);opacity:1}
 .copy{
   margin-top:18px;
   color:rgba(255,255,255,.55);
@@ -653,8 +699,10 @@ footer{
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIVE (improved)
 ========================= */
+
+/* Tablet and down */
 @media (max-width: 980px){
   .heroGrid{grid-template-columns:1fr; min-height:auto}
   .heroTitle{font-size:44px}
@@ -663,12 +711,45 @@ footer{
   .footerGrid{grid-template-columns:1fr}
   .floatingTags{position:relative; left:0; right:0; bottom:0; margin-top:12px; height:120px;}
 }
+
+/* Phones */
 @media (max-width: 760px){
+  .container{padding:0 14px}
+  .section{padding:54px 0}
+  .hero{padding-top:84px}
+
   .navlinks{display:none}
   .menuBtn{display:inline-grid; place-items:center}
-  .drawer.show{display:block}
-  .previewSlider{height:320px}
-  .embedGrid iframe{height:300px}
+
+  .heroLeft{padding:22px 18px}
+  .heroTitle{font-size:34px; line-height:1.08}
+  .heroSub{font-size:14px; line-height:1.7}
+  .service-pill{padding:13px 16px}
+  .service-pill__title{font-size:15px}
+
+  /* video/hero media behaves better on mobile */
+  .heroRight{min-height:48svh;} /* safer than vh on mobile */
+
+  .previewSlider{height:260px}
+  .embedGrid{grid-template-columns:1fr} /* force single column */
+  .embedGrid iframe{height:240px}
+
+  /* CTA becomes full width */
+  .waCtaPill{width:100%; max-width:420px; justify-content:center}
+}
+
+/* Tiny phones */
+@media (max-width: 420px){
+  .heroTitle{font-size:30px}
+  .service-pill{max-height:52px}
+  .previewSlider{height:220px}
+  .embedGrid iframe{height:220px}
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
@@ -697,7 +778,7 @@ footer{
       <a href="#contact">Contact</a>
     </nav>
 
-    <button class="menuBtn" id="menuBtn" aria-label="Open menu">≡</button>
+    <button class="menuBtn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">≡</button>
   </div>
 
   <div class="drawer" id="drawer">
@@ -770,7 +851,7 @@ footer{
                 </div>
               </div>
 
-              <!-- Web Design (NEW) -->
+              <!-- Web Design -->
               <div class="service-pill" role="button" tabindex="0" aria-expanded="false">
                 <div class="refraction"></div><div class="sheen"></div><div class="prism"></div><div class="liquid"></div><div class="noise"></div>
                 <div class="service-pill__top">
@@ -786,7 +867,6 @@ footer{
               </div>
             </div>
 
-            <!-- Animated texts in the empty area (like your screenshot) -->
             <div class="floatingTags" aria-hidden="true">
               <span class="left">Creatives</span>
               <span class="right">UI/UX</span>
@@ -797,7 +877,6 @@ footer{
               <span class="left">Brand Strategy</span>
               <span class="right">Packaging Design</span>
             </div>
-
           </div>
 
           <div class="heroRight" aria-label="Chess background video">
@@ -823,11 +902,9 @@ footer{
     </div>
   </section>
 
-  <!-- ABOUT (LEFT) + RECENT WORK (RIGHT) -->
+  <!-- ABOUT + RECENT WORK -->
   <section class="section">
     <div class="container grid2 reverse">
-
-      <!-- About Us (LEFT) -->
       <div class="card">
         <div class="kicker">About Us</div>
         <h2 style="margin:10px 0 10px">CreatoCrew</h2>
@@ -841,7 +918,6 @@ footer{
         </p>
       </div>
 
-      <!-- Recent Work (RIGHT) -->
       <div class="card">
         <div class="kicker">Recent Work</div>
         <h2 style="margin:10px 0 14px">Featured Project</h2>
@@ -860,7 +936,6 @@ footer{
           Auto preview (slides every few seconds).
         </p>
       </div>
-
     </div>
   </section>
 
@@ -992,83 +1067,19 @@ footer{
       </div>
 
       <div class="embedGrid" aria-label="Project embeds">
-        <!-- A -->
-        <iframe
-          src="https://drive.google.com/file/d/1u90Oc-15twM4A8oG-xbmABmokROkMP3g/preview"
-          allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        <iframe src="https://drive.google.com/file/d/1u90Oc-15twM4A8oG-xbmABmokROkMP3g/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        <iframe src="https://drive.google.com/file/d/1KhAJakKWLUGN7J3EPyUkQko4DepoqvfC/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        <iframe src="https://drive.google.com/file/d/1XSNM5PkB_vJYJZrmsbHAkBq6TNI_O-Fo/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        <iframe src="https://drive.google.com/file/d/13gxrHhZtp4lNZsVNZJ4laNE7YeDIPz6C/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        <iframe src="https://drive.google.com/file/d/1aEmtfAkGcAgT-sV9w3c0aNW0PUEhmFR-/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+        <iframe src="https://drive.google.com/file/d/1050duY7VHVYpxx23YJouRYBow7JCbtju/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
 
-        <!-- B -->
-        <iframe
-          src="https://drive.google.com/file/d/1KhAJakKWLUGN7J3EPyUkQko4DepoqvfC/preview"
-          allow="autoplay; encrypted-media" loading="lazy"></iframe>
-
-        <!-- C -->
-        <iframe
-          src="https://drive.google.com/file/d/1XSNM5PkB_vJYJZrmsbHAkBq6TNI_O-Fo/preview"
-          allow="autoplay; encrypted-media" loading="lazy"></iframe>
-
-        <!-- D -->
-        <iframe
-          src="https://drive.google.com/file/d/13gxrHhZtp4lNZsVNZJ4laNE7YeDIPz6C/preview"
-          allow="autoplay; encrypted-media" loading="lazy"></iframe>
-
-        <!-- E -->
-        <iframe
-          src="https://drive.google.com/file/d/1aEmtfAkGcAgT-sV9w3c0aNW0PUEhmFR-/preview"
-          allow="autoplay; encrypted-media" loading="lazy"></iframe>
-
-        <!-- F -->
-        <iframe
-          src="https://drive.google.com/file/d/1050duY7VHVYpxx23YJouRYBow7JCbtju/preview"
-          allow="autoplay; encrypted-media" loading="lazy"></iframe>
-
-        <!-- G -->
-        <iframe
-          src="https://www.behance.net/embed/project/202970317?ilo0=1"
-          allowfullscreen
-          allow="clipboard-write"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
-
-        <!-- H -->
-        <iframe
-          src="https://www.behance.net/embed/project/203024825?ilo0=1"
-          allowfullscreen
-          allow="clipboard-write"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
-
-        <!-- I -->
-        <iframe
-          src="https://www.behance.net/embed/project/202971449?ilo0=1"
-          allowfullscreen
-          allow="clipboard-write"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
-
-        <!-- J -->
-        <iframe
-          src="https://www.behance.net/embed/project/202967245?ilo0=1"
-          allowfullscreen
-          allow="clipboard-write"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
-
-        <!-- K -->
-        <iframe
-          src="https://www.behance.net/embed/project/202964729?ilo0=1"
-          allowfullscreen
-          allow="clipboard-write"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
-
-        <!-- L -->
-        <iframe
-          src="https://www.behance.net/embed/project/203711381?ilo0=1"
-          allowfullscreen
-          allow="clipboard-write"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/202970317?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/203024825?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/202971449?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/202967245?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/202964729?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/203711381?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
   </section>
@@ -1080,349 +1091,102 @@ footer{
         <div>
           <div class="kicker">Get a quote</div>
           <h2 style="margin:10px 0 8px">Get a personalized quote that fits your goals.</h2>
-          <div class="smallNote"></div>
-
-        
+          <div class="smallNote">Tap WhatsApp to send your request instantly.</div>
         </div>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>WhatsApp CTA Pill</title>
-
-<style>
-/* ===============================
-   WhatsApp Gradient Pill Button
-   =============================== */
-
-.waCtaPill{
-  --pill-h: 52px;
-  --icon-size: 34px;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-
-  height: var(--pill-h);
-  padding: 0 18px;
-  max-width: 220px;
-
-  border-radius: 999px;
-  white-space: nowrap;
-
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: .2px;
-  color: #fff;
-  text-decoration: none;
-
-  background: linear-gradient(
-    120deg,
-    #6f3fc8,
-    #4a1f7a,
-    #9c5cff,
-    #5b2d90
-  );
-  background-size: 300% 300%;
-  animation: pillGradient 6s ease infinite;
-
-  box-shadow:
-    0 10px 28px rgba(0,0,0,.45),
-    inset 0 1px 0 rgba(255,255,255,.18);
-
-  border: 1px solid rgba(255,255,255,.12);
-  cursor: pointer;
-
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-
-@keyframes pillGradient{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-.waCtaPill:hover{
-  transform: translateY(-2px);
-  box-shadow:
-    0 16px 36px rgba(0,0,0,.55),
-    inset 0 1px 0 rgba(255,255,255,.22);
-}
-
-.waCtaPill:active{
-  transform: translateY(0);
-}
-
-/* ===============================
-   Icon Wrapper
-   =============================== */
-
-.waIcon{
-  width: var(--icon-size);
-  height: var(--icon-size);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-
-  background: #fff;
-  box-shadow:
-    0 6px 14px rgba(0,0,0,.25),
-    inset 0 1px 0 rgba(255,255,255,.6);
-}
-
-/* ===============================
-   WhatsApp SVG Icon (Pulse)
-   =============================== */
-
-.waIcon svg{
-  width: 18px;
-  height: 18px;
-  color: #25d366; /* WhatsApp brand green */
-  animation: waPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes waPulse{
-  0%   { transform: scale(1); opacity: 1; }
-  50%  { transform: scale(1.15); opacity: .85; }
-  100% { transform: scale(1); opacity: 1; }
-}
-</style>
-</head>
-
-<body style="background:#05050a; padding:40px;">
-
-<a class="waCtaPill"
-   href="https://api.whatsapp.com/send/?phone=918281321607&text=Hi%2C+I%E2%80%99m+interested+in+your+services.+Could+you%20please%20share%20a%20quotation%3F"
-   target="_blank" rel="noopener">
-
-  <span class="waIcon">
-    <!-- Inline WhatsApp SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-      <path fill="currentColor" fill-rule="evenodd"
-        d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.033-.055A9.958 9.958 0 0 1 2 12Z"/>
-      <path fill="currentColor"
-        d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
-    </svg>
-  </span>
-
-  <span>WhatsApp Quote</span>
-</a>
-
-</body>
-</html>
-
-
-
-
-
-
-
+        <a class="waCtaPill"
+           href="https://api.whatsapp.com/send/?phone=918281321607&text=Hi%2C+I%E2%80%99m+interested+in+your+services.+Could+you%20please%20share%20a%20quotation%3F"
+           target="_blank" rel="noopener">
+          <span class="waIcon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+              <path fill="currentColor" fill-rule="evenodd"
+                d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.033-.055A9.958 9.958 0 0 1 2 12Z"/>
+              <path fill="currentColor"
+                d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
+            </svg>
+          </span>
+          <span>WhatsApp Quote</span>
+        </a>
       </div>
     </div>
   </section>
 
 </main>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>CreatoCrew Footer</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-  body{
-    margin:0;
-    background:#0b0b12;
-    color:#eaeaf0;
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  }
-
-  footer{
-    padding:60px 80px 30px;
-    background:radial-gradient(1200px 600px at center top, #0f0f1c, #05050a 70%);
-  }
-
-  .footerGrid{
-    display:grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap:80px;
-  }
-
-  .footerTitle{
-    font-size:18px;
-    font-weight:600;
-    margin-bottom:18px;
-    color:#ffffff;
-  }
-
-  .footerText{
-    font-size:15px;
-    line-height:1.7;
-    color:#c9c9d6;
-  }
-
-  .footerList{
-    list-style:none;
-    padding:0;
-    margin:0;
-  }
-
-  .footerList li{
-    margin-bottom:12px;
-    font-size:15px;
-    color:#c9c9d6;
-  }
-
-  .footerList a{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    color:#c9c9d6;
-    text-decoration:none;
-  }
-
-  .footerList a:hover{
-    color:#ffffff;
-  }
-
-  .footerList img{
-    width:18px;
-    height:18px;
-    opacity:.9;
-  }
-
-  .footerSocial{
-    display:flex;
-    gap:16px;
-    margin-top:22px;
-  }
-
-  .footerSocial img{
-    width:22px;
-    height:22px;
-    opacity:.8;
-    transition:.25s ease;
-  }
-
-  .footerSocial a:hover img{
-    transform:scale(1.2);
-    opacity:1;
-  }
-
-  .footerBottom{
-    margin-top:50px;
-    padding-top:20px;
-    border-top:1px solid rgba(255,255,255,.08);
-    font-size:13px;
-    color:#9a9ab0;
-  }
-
-  /* Responsive */
-  @media(max-width:900px){
-    footer{
-      padding:40px 24px 24px;
-    }
-    .footerGrid{
-      grid-template-columns:1fr;
-      gap:40px;
-    }
-  }
-</style>
-</head>
-
-<body>
-
 <footer>
+  <div class="container">
+    <div class="footerGrid">
 
-  <div class="footerGrid">
+      <div>
+        <p class="footerTitle">CreatoCrew</p>
+        <p class="footerText">
+          Ready to take your brand forward.<br>
+          Let’s begin with CreatoCrew.
+        </p>
 
-    <!-- BRAND -->
-    <div>
-      <p class="footerTitle">CreatoCrew</p>
-      <p class="footerText">
-        Ready to take your brand forward.<br>
-        Let’s begin with CreatoCrew.
-      </p>
-
-      <div class="footerSocial">
-        <a href="https://www.instagram.com/creatocrew/" target="_blank">
-          <img src="assets/icons/instagram.svg" alt="Instagram">
-        </a>
-        <a href="https://www.facebook.com/creatocrew/" target="_blank">
-          <img src="assets/icons/facebook.svg" alt="Facebook">
-        </a>
-        <a href="https://www.linkedin.com/company/creatocrew/" target="_blank">
-          <img src="assets/icons/linkedin.svg" alt="LinkedIn">
-        </a>
-        <a href="https://x.com/creatocrew" target="_blank">
-          <img src="assets/icons/x.svg" alt="X">
-        </a>
-        <a href="https://www.youtube.com/@creatocrew" target="_blank">
-          <img src="assets/icons/youtube.svg" alt="YouTube">
-        </a>
+        <div class="footerSocial">
+          <a href="https://www.instagram.com/creatocrew/" target="_blank" rel="noopener"><img src="assets/icons/instagram.svg" alt="Instagram"></a>
+          <a href="https://www.facebook.com/creatocrew/" target="_blank" rel="noopener"><img src="assets/icons/facebook.svg" alt="Facebook"></a>
+          <a href="https://www.linkedin.com/company/creatocrew/" target="_blank" rel="noopener"><img src="assets/icons/linkedin.svg" alt="LinkedIn"></a>
+          <a href="https://x.com/creatocrew" target="_blank" rel="noopener"><img src="assets/icons/x.svg" alt="X"></a>
+          <a href="https://www.youtube.com/@creatocrew" target="_blank" rel="noopener"><img src="assets/icons/youtube.svg" alt="YouTube"></a>
+        </div>
       </div>
+
+      <div>
+        <p class="footerTitle">Services</p>
+        <ul class="footerList">
+          <li>Posters · Carousels</li>
+          <li>Video Reels · Motion Graphics</li>
+          <li>Copywriting</li>
+          <li>Social Media Management</li>
+          <li>SEO / SEM · Web</li>
+          <li>Google Business Profile</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footerTitle">Contact</p>
+        <ul class="footerList">
+          <li>
+            <a href="tel:+918281321607">
+              <img src="assets/icons/phone.svg" alt="">
+              +91 82813 21607
+            </a>
+          </li>
+          <li>
+            <a href="mailto:info@creatocrew.com">
+              <img src="assets/icons/mail.svg" alt="">
+              info@creatocrew.com
+            </a>
+          </li>
+          <li>
+            <a href="https://www.creatocrew.com" target="_blank" rel="noopener">
+              <img src="assets/icons/web.svg" alt="">
+              www.creatocrew.com
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
-    <!-- SERVICES -->
-    <div>
-      <p class="footerTitle">Services</p>
-      <ul class="footerList">
-        <li>Posters · Carousels</li>
-        <li>Video Reels · Motion Graphics</li>
-        <li>Copywriting</li>
-        <li>Social Media Management</li>
-        <li>SEO / SEM · Web</li>
-        <li>Google Business Profile</li>
-      </ul>
-    </div>
-
-    <!-- CONTACT -->
-    <div>
-      <p class="footerTitle">Contact</p>
-      <ul class="footerList">
-        <li>
-          <a href="tel:+918281321607">
-            <img src="assets/icons/phone.svg" alt="">
-            +91 82813 21607
-          </a>
-        </li>
-        <li>
-          <a href="mailto:info@creatocrew.com">
-            <img src="assets/icons/mail.svg" alt="">
-            info@creatocrew.com
-          </a>
-        </li>
-        <li>
-          <a href="https://www.creatocrew.com" target="_blank">
-            <img src="assets/icons/web.svg" alt="">
-            www.creatocrew.com
-          </a>
-        </li>
-      </ul>
-    </div>
-
+    <div class="copy">© Copyright All rights reserved CreatoCrew 2025</div>
   </div>
-
-  <div class="footerBottom">
-    © Copyright All rights reserved CreatoCrew 2025
-  </div>
-
 </footer>
-
-</body>
-</html>
-
-
 
 <script>
 /* MOBILE NAV */
 const menuBtn = document.getElementById("menuBtn");
 const drawer = document.getElementById("drawer");
-menuBtn?.addEventListener("click", ()=> drawer.classList.toggle("show"));
-drawer?.querySelectorAll("a").forEach(a=> a.addEventListener("click", ()=> drawer.classList.remove("show")));
+menuBtn?.addEventListener("click", ()=>{
+  const isOpen = drawer.classList.toggle("show");
+  menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+});
+drawer?.querySelectorAll("a").forEach(a=> a.addEventListener("click", ()=>{
+  drawer.classList.remove("show");
+  menuBtn?.setAttribute("aria-expanded","false");
+}));
 
 /* TYPEWRITER */
 const typeTarget = document.getElementById("typeTarget");
@@ -1465,8 +1229,7 @@ if(marquee){
       marquee.appendChild(img);
     }
   };
-  make();
-  make();
+  make(); make();
 }
 
 /* Recent Work auto-slide iframes */
