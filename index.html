@@ -719,6 +719,47 @@ footer{
   font-size:13px;
 }
 
+  /* =========================
+   SCROLL-TRIGGERED REVEAL
+========================= */
+
+/* default hidden state */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(10px);
+  transition:
+    opacity .75s ease,
+    transform .95s cubic-bezier(.16,1,.3,1),
+    filter .95s ease;
+  will-change: transform, opacity, filter;
+}
+
+/* direction variants */
+.reveal--left{ transform: translateX(-44px) translateY(10px); }
+.reveal--right{ transform: translateX(44px) translateY(10px); }
+.reveal--up{ transform: translateY(34px); }
+
+/* when visible */
+.reveal.is-in{
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+  filter: blur(0);
+}
+
+/* stagger support */
+.reveal{ transition-delay: var(--d, 0ms); }
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .reveal{
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
 /* =========================
    RESPONSIVE
 ========================= */
@@ -881,6 +922,13 @@ footer{
                 </div>
               </div>
             </div>
+<article class="svcCard reveal reveal--left" id="svc-creatives">...</article>
+<article class="svcCard reveal reveal--right" id="svc-digital">...</article>
+<article class="svcCard reveal reveal--left" id="svc-branding">...</article>
+<article class="svcCard reveal reveal--right" id="svc-web">...</article>
+<div class="kicker reveal reveal--up">Services</div>
+<h2 class="reveal reveal--up" style="margin:10px 0 8px">What we do</h2>
+<p class="reveal reveal--up" style="margin:0; color:var(--muted); ...">...</p>
 
             <div class="floatingTags" aria-hidden="true">
               <span class="left">Creatives</span>
@@ -1219,7 +1267,38 @@ setInterval(()=>{
   s = (s + 1) % rwSlides.length;
   rwSlides[s].classList.add("active");
 }, 5000);
+
+  /* =========================
+   SCROLL REVEAL (left/right suspense)
+========================= */
+(function(){
+  const items = Array.from(document.querySelectorAll(".reveal"));
+  if(!items.length) return;
+
+  // Stagger: 0ms, 90ms, 180ms...
+  items.forEach((el, i) => {
+    const base = 90;                 // change to 60 for faster, 120 for slower
+    el.style.setProperty("--d", `${(i % 8) * base}ms`);
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target); // reveal once
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.12,                 // how much visible before triggering
+    rootMargin: "0px 0px -10% 0px"    // triggers a bit before fully in view
+  });
+
+  items.forEach(el => io.observe(el));
+})();
+
 </script>
 
 </body>
 </html>
+
