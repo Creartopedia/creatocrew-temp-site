@@ -29,7 +29,7 @@ body{
     radial-gradient(900px 700px at 85% 28%, rgba(160,90,255,.14), transparent 55%),
     radial-gradient(1200px 900px at 55% 110%, rgba(90,0,180,.10), transparent 62%),
     var(--bg);
-  overflow-x:hidden; /* mobile safety */
+  overflow-x:hidden;
 }
 img, video, iframe{max-width:100%}
 a{color:inherit}
@@ -422,7 +422,7 @@ header{
 .learnMore:hover{ text-decoration:underline; }
 
 /* =========================
-   FLOATING SCROLL TEXTS
+   FLOATING TEXTS (hero)
 ========================= */
 .floatingTags{
   position:absolute;
@@ -534,6 +534,56 @@ header{
 }
 
 /* =========================
+   NEW SERVICES SHOWCASE (like your last screenshot)
+========================= */
+.servicesGrid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:18px;
+  margin-top:16px;
+}
+.svcCard{
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 70px rgba(0,0,0,.45);
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
+.svcImg{ height:160px; background:rgba(0,0,0,.25); }
+.svcImg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.svcBody{ padding:16px 16px 18px; }
+.svcBody h3{
+  margin:0 0 10px 0;
+  font-size:20px;
+  letter-spacing:-.01em;
+}
+.svcBody ul{
+  margin:0 0 14px 18px;
+  padding:0;
+  color:var(--muted);
+  line-height:1.75;
+  font-size:14px;
+}
+.svcBody li{ margin:0 0 6px 0; }
+.svcLink{
+  display:inline-block;
+  font-weight:700;
+  text-decoration:none;
+  color:#d3b0ff;
+}
+.svcLink:hover{ text-decoration:underline; }
+
+/* =========================
    WORKS (EMBED GRID)
 ========================= */
 .worksHead{display:flex; align-items:end; justify-content:space-between; gap:16px;}
@@ -553,35 +603,7 @@ header{
 }
 
 /* =========================
-   DETAIL SECTIONS
-========================= */
-.detailCard{
-  border-radius:26px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.05);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 18px 70px rgba(0,0,0,.55);
-  padding:24px;
-}
-.detailCard h2{margin:6px 0 10px}
-.detailGrid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-  gap:16px;
-  margin-top:14px;
-}
-.detailItem{
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.18);
-  padding:14px;
-}
-.detailItem b{display:block; margin-bottom:6px}
-.detailItem p{margin:0; color:var(--muted); line-height:1.6; font-size:14px}
-
-/* =========================
-   QUOTE CTA + SOCIAL ICONS
+   QUOTE CTA
 ========================= */
 .quoteRow{
   display:flex;
@@ -592,7 +614,6 @@ header{
 }
 .smallNote{color:var(--muted); font-size:13px}
 
-/* WhatsApp pill (kept, but integrated properly) */
 .waCtaPill{
   --pill-h: 52px;
   --icon-size: 34px;
@@ -699,10 +720,13 @@ footer{
 }
 
 /* =========================
-   RESPONSIVE (improved)
+   RESPONSIVE
 ========================= */
+@media (max-width: 1100px){
+  .servicesGrid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .svcImg{ height:180px; }
+}
 
-/* Tablet and down */
 @media (max-width: 980px){
   .heroGrid{grid-template-columns:1fr; min-height:auto}
   .heroTitle{font-size:44px}
@@ -712,7 +736,6 @@ footer{
   .floatingTags{position:relative; left:0; right:0; bottom:0; margin-top:12px; height:120px;}
 }
 
-/* Phones */
 @media (max-width: 760px){
   .container{padding:0 14px}
   .section{padding:54px 0}
@@ -724,29 +747,25 @@ footer{
   .heroLeft{padding:22px 18px}
   .heroTitle{font-size:34px; line-height:1.08}
   .heroSub{font-size:14px; line-height:1.7}
-  .service-pill{padding:13px 16px}
-  .service-pill__title{font-size:15px}
 
-  /* video/hero media behaves better on mobile */
-  .heroRight{min-height:48svh;} /* safer than vh on mobile */
+  .heroRight{min-height:48svh;}
 
   .previewSlider{height:260px}
-  .embedGrid{grid-template-columns:1fr} /* force single column */
+  .embedGrid{grid-template-columns:1fr}
   .embedGrid iframe{height:240px}
 
-  /* CTA becomes full width */
+  .servicesGrid{ grid-template-columns:1fr; }
+  .svcImg{ height:190px; }
+
   .waCtaPill{width:100%; max-width:420px; justify-content:center}
 }
 
-/* Tiny phones */
 @media (max-width: 420px){
   .heroTitle{font-size:30px}
-  .service-pill{max-height:52px}
   .previewSlider{height:220px}
   .embedGrid iframe{height:220px}
 }
 
-/* Reduce motion */
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
   html{scroll-behavior:auto}
@@ -809,7 +828,6 @@ footer{
             </p>
 
             <div class="pillStack" id="services">
-              <!-- Creatives -->
               <div class="service-pill" role="button" tabindex="0" aria-expanded="false">
                 <div class="refraction"></div><div class="sheen"></div><div class="prism"></div><div class="liquid"></div><div class="noise"></div>
                 <div class="service-pill__top">
@@ -819,11 +837,10 @@ footer{
                 <div class="service-pill__body">
                   Posters, carousels, reels, motion graphics, and copywriting designed to catch attention and build trust.
                   <br>
-                  <a class="learnMore" href="#creatives">Learn more →</a>
+                  <a class="learnMore" href="#svc-creatives">Read more →</a>
                 </div>
               </div>
 
-              <!-- Digital Marketing -->
               <div class="service-pill" role="button" tabindex="0" aria-expanded="false">
                 <div class="refraction"></div><div class="sheen"></div><div class="prism"></div><div class="liquid"></div><div class="noise"></div>
                 <div class="service-pill__top">
@@ -833,11 +850,10 @@ footer{
                 <div class="service-pill__body">
                   Social media management, SEO/SEM, and Google Business Profile optimisation to drive visibility and leads.
                   <br>
-                  <a class="learnMore" href="#digital-marketing">Learn more →</a>
+                  <a class="learnMore" href="#svc-digital">Read more →</a>
                 </div>
               </div>
 
-              <!-- Branding -->
               <div class="service-pill" role="button" tabindex="0" aria-expanded="false">
                 <div class="refraction"></div><div class="sheen"></div><div class="prism"></div><div class="liquid"></div><div class="noise"></div>
                 <div class="service-pill__top">
@@ -847,11 +863,10 @@ footer{
                 <div class="service-pill__body">
                   Brand identity, strategy, collateral, packaging, and rebranding to make your business consistent and memorable.
                   <br>
-                  <a class="learnMore" href="#branding">Learn more →</a>
+                  <a class="learnMore" href="#svc-branding">Read more →</a>
                 </div>
               </div>
 
-              <!-- Web Design -->
               <div class="service-pill" role="button" tabindex="0" aria-expanded="false">
                 <div class="refraction"></div><div class="sheen"></div><div class="prism"></div><div class="liquid"></div><div class="noise"></div>
                 <div class="service-pill__top">
@@ -860,9 +875,9 @@ footer{
                 </div>
                 <div class="service-pill__body">
                   Clean, modern websites crafted with intuitive UI/UX and SEO-friendly structure.
-                  Built for clarity, credibility, and high conversion—giving your users a seamless experience.
+                  Built for clarity, credibility, and high conversion.
                   <br>
-                  <a class="learnMore" href="#web-design">Learn more →</a>
+                  <a class="learnMore" href="#svc-web">Read more →</a>
                 </div>
               </div>
             </div>
@@ -906,7 +921,7 @@ footer{
   <section class="section">
     <div class="container grid2 reverse">
       <div class="card">
-        <div class="kicker">About Us</div>
+        <div class="kicker">About</div>
         <h2 style="margin:10px 0 10px">CreatoCrew</h2>
         <p>
           CreatoCrew is a creative and digital marketing team focused on helping brands grow with smart strategy,
@@ -939,119 +954,83 @@ footer{
     </div>
   </section>
 
-  <!-- DETAIL SECTIONS -->
-  <section class="section" id="creatives">
-    <div class="container detailCard">
+  <!-- SERVICES SHOWCASE (clean layout like your last screenshot) -->
+  <section class="section" id="services-showcase">
+    <div class="container">
       <div class="kicker">Services</div>
-      <h2>Creatives</h2>
+      <h2 style="margin:10px 0 8px">What we do</h2>
+      <p style="margin:0; color:var(--muted); max-width:70ch; line-height:1.7">
+        Simple, clear service blocks — no repeated “Services” headings, no heavy box overload.
+      </p>
 
-      <div class="detailGrid">
-        <div class="detailItem">
-          <b>Posters</b>
-          <p>Attractive designs for daily posts, offers, trends, and awareness messages that quickly catch attention.</p>
-        </div>
-        <div class="detailItem">
-          <b>Carousels</b>
-          <p>Multi-step slides that explain your message clearly and increase engagement.</p>
-        </div>
-        <div class="detailItem">
-          <b>Video Reels</b>
-          <p>
-            Short, high-impact reels and video content for social media, including product demos, awareness videos,
-            marketing clips, anchor presentations, and voiceover visuals. We also handle shot planning, styling,
-            and creative direction to ensure every visual fits your brand and delivers better reach, engagement, and leads.
-          </p>
-        </div>
-        <div class="detailItem">
-          <b>Motion Graphics</b>
-          <p>Animated elements, transitions, and explainers that bring ideas to life with energy and precision.</p>
-        </div>
-        <div class="detailItem">
-          <b>Copywriting</b>
-          <p>Clear and effective text for your posts, ads, and marketing messages.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="servicesGrid">
 
-  <section class="section" id="digital-marketing">
-    <div class="container detailCard">
-      <div class="kicker">Services</div>
-      <h2>Digital Marketing</h2>
+        <article class="svcCard" id="svc-creatives">
+          <div class="svcImg">
+            <img src="assets/images/services/creatives.jpg" alt="Creatives" loading="lazy">
+          </div>
+          <div class="svcBody">
+            <h3>Creatives</h3>
+            <ul>
+              <li>Posters & social creatives</li>
+              <li>Carousels (multi-slide storytelling)</li>
+              <li>Video reels & short edits</li>
+              <li>Motion graphics & animated ads</li>
+              <li>Copywriting for posts & campaigns</li>
+            </ul>
+            <a class="svcLink" href="#contact">All Services →</a>
+          </div>
+        </article>
 
-      <div class="detailGrid">
-        <div class="detailItem">
-          <b>Social Media Management</b>
-          <p>
-            We handle your daily posts, engagement, and page updates with a clear content calendar and a solid content strategy.
-            Everything is managed through Meta Business Suite, Ads Manager, and Google Ads Manager to ensure steady and effective growth.
-          </p>
-        </div>
-        <div class="detailItem">
-          <b>SEO / SEM</b>
-          <p>Visibility that isn't accidental. Search ranking, keyword optimisation, and targeted ad spend that brings real leads.</p>
-        </div>
-        <div class="detailItem">
-          <b>Google Business Profile</b>
-          <p>
-            We create, optimize, and manage your Google Business listing with regular updates, maintenance, SEO-focused improvements,
-            and ranking support to help customers find you easily and increase local enquiries.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <article class="svcCard" id="svc-digital">
+          <div class="svcImg">
+            <img src="assets/images/services/digital.jpg" alt="Digital Marketing" loading="lazy">
+          </div>
+          <div class="svcBody">
+            <h3>Digital Marketing</h3>
+            <ul>
+              <li>Social media management & calendar</li>
+              <li>Meta Ads / Google Ads support</li>
+              <li>SEO / SEM for discoverability</li>
+              <li>Google Business Profile & local ranking</li>
+            </ul>
+            <a class="svcLink" href="#contact">All Services →</a>
+          </div>
+        </article>
 
-  <section class="section" id="branding">
-    <div class="container detailCard">
-      <div class="kicker">Services</div>
-      <h2>Branding</h2>
+        <article class="svcCard" id="svc-branding">
+          <div class="svcImg">
+            <img src="assets/images/services/branding.jpg" alt="Branding" loading="lazy">
+          </div>
+          <div class="svcBody">
+            <h3>Branding</h3>
+            <ul>
+              <li>Logo + brand identity system</li>
+              <li>Brand guidelines & design kit</li>
+              <li>Brochures, menus & stationery</li>
+              <li>Packaging & print creatives</li>
+              <li>Rebranding & modernization</li>
+            </ul>
+            <a class="svcLink" href="#contact">All Services →</a>
+          </div>
+        </article>
 
-      <div class="detailGrid">
-        <div class="detailItem">
-          <b>Brand Identity Design</b>
-          <p>
-            We create a complete identity for your brand, including your logo, visual symbols, color palette, and overall style.
-            This also includes clear brand guidelines that help you use these elements correctly across print, digital, and social media.
-          </p>
-        </div>
-        <div class="detailItem">
-          <b>Brand Strategy</b>
-          <p>
-            We define how your brand should look and communicate across all platforms.
-            This includes clear guidelines for using your visual elements and strong messaging such as your tagline, brand story,
-            and key communication lines.
-          </p>
-        </div>
-        <div class="detailItem">
-          <b>Stationery & Collateral</b>
-          <p>Designs for business cards, letterheads, brochures, menus, and other essential branded materials.</p>
-        </div>
-        <div class="detailItem">
-          <b>Packaging Design</b>
-          <p>Creative and attractive packaging that strengthens brand identity and improves customer experience.</p>
-        </div>
-        <div class="detailItem">
-          <b>Rebranding</b>
-          <p>Updating and refreshing your existing brand with a modern identity that matches your current goals.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <article class="svcCard" id="svc-web">
+          <div class="svcImg">
+            <img src="assets/images/services/web.jpg" alt="Web Design" loading="lazy">
+          </div>
+          <div class="svcBody">
+            <h3>Web Design</h3>
+            <ul>
+              <li>UI/UX + responsive website build</li>
+              <li>Clean landing pages & websites</li>
+              <li>SEO-friendly structure</li>
+              <li>Conversion-focused sections & CTA</li>
+            </ul>
+            <a class="svcLink" href="#contact">All Services →</a>
+          </div>
+        </article>
 
-  <section class="section" id="web-design">
-    <div class="container detailCard">
-      <div class="kicker">Services</div>
-      <h2>Web Design</h2>
-
-      <div class="detailGrid">
-        <div class="detailItem">
-          <b>UI/UX + Website Build</b>
-          <p>
-            Clean, modern websites crafted with intuitive UI/UX and SEO-friendly structure.
-            Built for clarity, credibility, and high conversion, giving your users a seamless and effective experience.
-          </p>
-        </div>
       </div>
     </div>
   </section>
