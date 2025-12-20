@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CreatoCrew – Make Your Brand Impossible to Ignore</title>
 
+<!-- ======================
+     Google Fonts (ADD)
+====================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --bg:#05050a;
@@ -16,13 +23,25 @@
   --p3:rgba(110,0,220,.18);
 
   --container: 1200px;
+
+  /* ======================
+     Font vars (ADD)
+  ====================== */
+  --font-ui: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-pixel: "Pixelify Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+
+/* ======================
+   UPDATE THIS (IMPORTANT)
+   You had system-ui here.
+====================== */
 body{
   margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  font-family: var(--font-ui);
+  font-weight: 400;
   color:var(--text);
   background:
     radial-gradient(900px 700px at 18% 18%, rgba(140,0,255,.18), transparent 58%),
@@ -35,6 +54,27 @@ a{color:inherit}
 .container{max-width:var(--container); margin:0 auto; padding:0 18px}
 .section{padding:72px 0}
 .kicker{letter-spacing:.28em; color:rgba(255,255,255,.65); font-size:13px; text-transform:uppercase}
+
+/* ======================
+   Optional utility classes (ADD)
+====================== */
+.font-geist{ font-family: var(--font-ui); }
+.font-pixelify{ font-family: var(--font-pixel); }
+
+/* (Optional) common heading styling */
+h1,h2,h3{ font-family: var(--font-ui); }
+
+/* Use Pixelify only where you want it:
+   <h1 class="font-pixelify">CreatoCrew</h1>
+*/
+</style>
+</head>
+
+<body>
+  <!-- Your existing HTML continues here -->
+</body>
+</html>
+
 
 /* =========================
    TOP NAV (GLASS)
