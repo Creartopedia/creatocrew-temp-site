@@ -1080,24 +1080,9 @@ footer{
         <div>
           <div class="kicker">Get a quote</div>
           <h2 style="margin:10px 0 8px">Get a personalized quote that fits your goals.</h2>
-          <div class="smallNote">WhatsApp: +91 82813 21607 · Email: info@creatocrew.com · Web: www.creatocrew.com</div>
+          <div class="smallNote"></div>
 
-          <!-- ICON FILE NAMES (add your files in assets/icons/) -->
-          <div class="socialRow">
-            <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
-              <img src="assets/icons/instagram.svg" alt="">
-            </a>
-            <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
-              <img src="assets/icons/facebook.svg" alt="">
-            </a>
-            <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
-              <img src="assets/icons/linkedin.svg" alt="">
-            </a>
-            <a href="#" target="_blank" rel="noopener" aria-label="YouTube">
-              <img src="assets/icons/youtube.svg" alt="">
-            </a>
-          </div>
-
+        
         </div>
 
 <!DOCTYPE html>
@@ -1250,22 +1235,33 @@ footer{
 <style>
   body{
     margin:0;
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
     background:#0b0b12;
-    color:#fff;
+    color:#eaeaf0;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
   }
 
-  /* FOOTER */
   footer{
-    padding:40px 24px;
-    background:#05050a;
+    padding:60px 80px 30px;
+    background:radial-gradient(1200px 600px at center top, #0f0f1c, #05050a 70%);
+  }
+
+  .footerGrid{
+    display:grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap:80px;
   }
 
   .footerTitle{
     font-size:18px;
     font-weight:600;
-    margin-bottom:16px;
-    letter-spacing:.3px;
+    margin-bottom:18px;
+    color:#ffffff;
+  }
+
+  .footerText{
+    font-size:15px;
+    line-height:1.7;
+    color:#c9c9d6;
   }
 
   .footerList{
@@ -1276,42 +1272,39 @@ footer{
 
   .footerList li{
     margin-bottom:12px;
+    font-size:15px;
+    color:#c9c9d6;
   }
 
   .footerList a{
     display:flex;
     align-items:center;
     gap:12px;
-    color:#e6e6f0;
+    color:#c9c9d6;
     text-decoration:none;
-    font-size:15px;
   }
 
   .footerList a:hover{
-    color:#fff;
+    color:#ffffff;
   }
 
   .footerList img{
     width:18px;
     height:18px;
+    opacity:.9;
   }
 
-  /* SOCIAL ICONS */
   .footerSocial{
     display:flex;
     gap:16px;
     margin-top:22px;
   }
 
-  .footerSocial a{
-    display:inline-flex;
-  }
-
   .footerSocial img{
     width:22px;
     height:22px;
-    opacity:.85;
-    transition:transform .25s ease, opacity .25s ease;
+    opacity:.8;
+    transition:.25s ease;
   }
 
   .footerSocial a:hover img{
@@ -1319,10 +1312,22 @@ footer{
     opacity:1;
   }
 
-  /* RESPONSIVE */
-  @media(max-width:600px){
+  .footerBottom{
+    margin-top:50px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.08);
+    font-size:13px;
+    color:#9a9ab0;
+  }
+
+  /* Responsive */
+  @media(max-width:900px){
     footer{
-      padding:32px 18px;
+      padding:40px 24px 24px;
+    }
+    .footerGrid{
+      grid-template-columns:1fr;
+      gap:40px;
     }
   }
 </style>
@@ -1331,56 +1336,85 @@ footer{
 <body>
 
 <footer>
-  <p class="footerTitle">Contact</p>
 
-  <ul class="footerList">
-    <li>
-      <a href="tel:+918281321607">
-        <img src="assets/icons/phone.svg" alt="Phone">
-        +91 82813 21607
-      </a>
-    </li>
+  <div class="footerGrid">
 
-    <li>
-      <a href="mailto:info@creatocrew.com">
-        <img src="assets/icons/mail.svg" alt="Email">
-        info@creatocrew.com
-      </a>
-    </li>
+    <!-- BRAND -->
+    <div>
+      <p class="footerTitle">CreatoCrew</p>
+      <p class="footerText">
+        Ready to take your brand forward.<br>
+        Let’s begin with CreatoCrew.
+      </p>
 
-    <li>
-      <a href="https://www.creatocrew.com" target="_blank" rel="noopener">
-        <img src="assets/icons/web.svg" alt="Website">
-        www.creatocrew.com
-      </a>
-    </li>
-  </ul>
+      <div class="footerSocial">
+        <a href="https://www.instagram.com/creatocrew/" target="_blank">
+          <img src="assets/icons/instagram.svg" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com/creatocrew/" target="_blank">
+          <img src="assets/icons/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://www.linkedin.com/company/creatocrew/" target="_blank">
+          <img src="assets/icons/linkedin.svg" alt="LinkedIn">
+        </a>
+        <a href="https://x.com/creatocrew" target="_blank">
+          <img src="assets/icons/x.svg" alt="X">
+        </a>
+        <a href="https://www.youtube.com/@creatocrew" target="_blank">
+          <img src="assets/icons/youtube.svg" alt="YouTube">
+        </a>
+      </div>
+    </div>
 
-  <div class="footerSocial">
-    <a href="https://www.instagram.com/creatocrew/" target="_blank" aria-label="Instagram">
-      <img src="assets/icons/instagram.svg" alt="Instagram">
-    </a>
+    <!-- SERVICES -->
+    <div>
+      <p class="footerTitle">Services</p>
+      <ul class="footerList">
+        <li>Posters · Carousels</li>
+        <li>Video Reels · Motion Graphics</li>
+        <li>Copywriting</li>
+        <li>Social Media Management</li>
+        <li>SEO / SEM · Web</li>
+        <li>Google Business Profile</li>
+      </ul>
+    </div>
 
-    <a href="https://www.facebook.com/creatocrew/" target="_blank" aria-label="Facebook">
-      <img src="assets/icons/facebook.svg" alt="Facebook">
-    </a>
+    <!-- CONTACT -->
+    <div>
+      <p class="footerTitle">Contact</p>
+      <ul class="footerList">
+        <li>
+          <a href="tel:+918281321607">
+            <img src="assets/icons/phone.svg" alt="">
+            +91 82813 21607
+          </a>
+        </li>
+        <li>
+          <a href="mailto:info@creatocrew.com">
+            <img src="assets/icons/mail.svg" alt="">
+            info@creatocrew.com
+          </a>
+        </li>
+        <li>
+          <a href="https://www.creatocrew.com" target="_blank">
+            <img src="assets/icons/web.svg" alt="">
+            www.creatocrew.com
+          </a>
+        </li>
+      </ul>
+    </div>
 
-    <a href="https://www.linkedin.com/company/creatocrew/" target="_blank" aria-label="LinkedIn">
-      <img src="assets/icons/linkedin.svg" alt="LinkedIn">
-    </a>
-
-    <a href="https://x.com/creatocrew" target="_blank" aria-label="X">
-      <img src="assets/icons/x.svg" alt="X">
-    </a>
-
-    <a href="https://www.youtube.com/@creatocrew" target="_blank" aria-label="YouTube">
-      <img src="assets/icons/youtube.svg" alt="YouTube">
-    </a>
   </div>
+
+  <div class="footerBottom">
+    © Copyright All rights reserved CreatoCrew 2025
+  </div>
+
 </footer>
 
 </body>
 </html>
+
 
 
 <script>
