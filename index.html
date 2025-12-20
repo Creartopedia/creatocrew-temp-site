@@ -1102,7 +1102,7 @@ footer{
 
 <style>
 /* ===============================
-   WhatsApp Gradient Pill Button
+   WhatsApp Animated Pill Button
    =============================== */
 
 .waCtaPill{
@@ -1164,6 +1164,7 @@ footer{
   transform: translateY(0);
 }
 
+/* === Icon wrapper === */
 .waIcon{
   width: var(--icon-size);
   height: var(--icon-size);
@@ -1177,12 +1178,15 @@ footer{
     inset 0 1px 0 rgba(255,255,255,.6);
 }
 
+/* === CRITICAL FIX: force SVG visible === */
 .waIcon img{
   width: 18px;
   height: 18px;
   display: block;
-}
 
+  /* 🔥 this fixes white-on-white SVG */
+  filter: brightness(0);
+}
 </style>
 
 <a class="waCtaPill"
@@ -1190,7 +1194,7 @@ footer{
    target="_blank" rel="noopener">
 
   <span class="waIcon">
-    <img src="assets/icons/whatsapp.svg" alt="WhatsApp">
+    <img src="/assets/icons/whatsapp.svg" alt="WhatsApp">
   </span>
 
   <span>WhatsApp Quote</span>
