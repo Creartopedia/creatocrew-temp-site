@@ -112,24 +112,28 @@ header{
    HERO (WHITE BORDER + CLIP)
 ========================= */
 .hero{padding-top:92px; padding-bottom:34px}
+
 .heroCard{
   border:1px solid rgba(255,255,255,.65);
   border-radius:28px;
-  overflow:hidden;
+  overflow:hidden; /* clips video INSIDE border */
   background:rgba(255,255,255,.02);
   box-shadow: 0 34px 120px rgba(0,0,0,.70);
 }
+
 .heroGrid{
   display:grid;
   grid-template-columns: 1.15fr .85fr;
-  gap:0;
+  gap:0;              /* IMPORTANT: no gap, so blend is seamless */
   min-height:520px;
 }
+
 .heroLeft{
   padding:34px 28px;
   position:relative;
   z-index:2;
 }
+
 .heroTitle{
   font-size:52px;
   line-height:1.05;
@@ -154,11 +158,14 @@ header{
   font-size:15px;
 }
 
+/* right media block */
 .heroRight{
   position:relative;
   min-height:520px;
   background:rgba(255,255,255,.03);
 }
+
+/* media fills right side ONLY */
 .heroRight video,
 .heroRight img{
   width:100%;
@@ -166,6 +173,8 @@ header{
   object-fit:cover;
   display:block;
 }
+
+/* ✅ TRUE blend mask (video → left content background) */
 .heroRight::before{
   content:"";
   position:absolute;
@@ -178,6 +187,8 @@ header{
     rgba(5,5,10,.25) 62%,
     rgba(5,5,10,0) 100%);
 }
+
+/* soft seam highlight */
 .heroRight::after{
   content:"";
   position:absolute;
@@ -188,7 +199,7 @@ header{
 }
 
 /* =========================
-   LIQUID GLASS PILLS (same as your working version)
+   LIQUID GLASS PILL (Your existing)
 ========================= */
 @property --spin { syntax:"<angle>"; inherits:false; initial-value:0deg; }
 @property --spin2{ syntax:"<angle>"; inherits:false; initial-value:0deg; }
@@ -338,6 +349,7 @@ header{
     rgba(255,255,255,0) 5px);
   animation:noiseShift 7s linear infinite;
 }
+
 .service-pill__top, .service-pill__body{ position:relative; z-index:2; }
 .service-pill__top{display:flex; align-items:center; justify-content:space-between; gap:16px;}
 .service-pill__title{font-size:16px; font-weight:650; letter-spacing:.2px; text-shadow:0 1px 0 rgba(0,0,0,.25);}
@@ -403,6 +415,21 @@ header{
 .service-pill:focus-visible{outline:2px solid rgba(180,70,255,.25); outline-offset:4px;}
 
 /* =========================
+   SECTION CARDS
+========================= */
+.grid2{display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;}
+.card{
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 70px rgba(0,0,0,.55);
+  padding:22px;
+}
+.card p{color:var(--muted); line-height:1.65; margin:0}
+
+/* =========================
    CLIENTS MARQUEE
 ========================= */
 .clientsWrap{
@@ -434,98 +461,41 @@ header{
 }
 
 /* =========================
-   SECTION CARDS
+   WORKS SLIDER
 ========================= */
-.grid2{display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;}
-.card{
-  border-radius:26px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.05);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 18px 70px rgba(0,0,0,.55);
-  padding:22px;
-}
-.card p{color:var(--muted); line-height:1.65; margin:0}
-
-/* =========================
-   COVERFLOW (Our Works)
-========================= */
-.coverflowWrap{
-  border-radius:26px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.03);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 18px 70px rgba(0,0,0,.55);
-  overflow:hidden;
-  padding:22px 18px 18px;
-}
-
-.coverflowStage{
-  position:relative;
-  height:360px;
-  width:100%;
-  perspective: 900px;
-  -webkit-perspective: 900px;
-  overflow:hidden;
-}
-
-#coverflow{
-  position:absolute;
-  inset:0;
-}
-
-#coverflow .cfItem{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:320px;
-  height:220px;
-  transform-style:preserve-3d;
-  transition: transform 320ms ease, filter 320ms ease;
-  border-radius:20px;
-  margin-left:-160px;
-  margin-top:-110px;
-  overflow:hidden;
-
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.05);
-  box-shadow: 0 22px 70px rgba(0,0,0,.55);
-}
-
-.cfThumb{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.cfOverlay{
-  position:absolute;
-  inset:0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.75) 100%);
-  pointer-events:none;
-}
-
-.cfMeta{
-  position:absolute;
-  left:14px;
-  right:14px;
-  bottom:12px;
-  font-size:13px;
-  color:rgba(255,255,255,.86);
-  line-height:1.35;
-}
-.cfMeta b{display:block; font-size:14px}
-
-.coverflowControls{
+.worksHead{display:flex; align-items:end; justify-content:space-between; gap:16px;}
+.slider{margin-top:16px; position:relative;}
+.track{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-top:14px;
+  gap:16px;
+  overflow:auto;
+  scroll-snap-type:x mandatory;
+  padding:6px 2px 10px;
 }
+.track::-webkit-scrollbar{height:10px}
+.track::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12); border-radius:999px}
+.workCard{
+  scroll-snap-align:start;
+  min-width: 320px;
+  max-width: 320px;
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  overflow:hidden;
+  text-decoration:none;
+  box-shadow: 0 18px 70px rgba(0,0,0,.55);
+}
+.thumb{
+  height:190px;
+  background:
+    radial-gradient(700px 220px at 20% 20%, rgba(140,0,255,.24), transparent 55%),
+    radial-gradient(700px 220px at 90% 80%, rgba(180,70,255,.18), transparent 60%),
+    rgba(0,0,0,.25);
+}
+.thumb img{width:100%; height:100%; object-fit:cover; display:block}
+.workBody{padding:16px}
+.workTitle{font-weight:700; margin:0 0 6px 0}
+.workMeta{margin:0; color:var(--muted); font-size:13px; line-height:1.5}
 .arrowRow{display:flex; gap:10px;}
 .arrowBtn{
   width:42px; height:42px;
@@ -538,7 +508,6 @@ header{
   -webkit-backdrop-filter: blur(14px);
 }
 .arrowBtn:hover{background:rgba(255,255,255,.10)}
-.smallHint{color:var(--muted); font-size:13px}
 
 /* =========================
    QUOTE CTA + SOCIAL ICONS
@@ -627,8 +596,6 @@ footer{
   .heroRight{min-height:320px}
   .grid2{grid-template-columns:1fr}
   .footerGrid{grid-template-columns:1fr}
-  .coverflowStage{height:330px}
-  #coverflow .cfItem{width:280px; height:200px; margin-left:-140px; margin-top:-100px;}
 }
 @media (max-width: 760px){
   .navlinks{display:none}
@@ -657,7 +624,7 @@ footer{
 
     <nav class="navlinks" aria-label="Primary">
       <a href="#home">Home</a>
-      <a href="#clients">Clients</a>
+      <a href="#services">Services</a>
       <a href="#works">Works</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -667,7 +634,7 @@ footer{
 
   <div class="drawer" id="drawer">
     <a href="#home">Home</a>
-    <a href="#clients">Clients</a>
+    <a href="#services">Services</a>
     <a href="#works">Works</a>
     <a href="#contact">Contact</a>
   </div>
@@ -683,7 +650,8 @@ footer{
 
           <div class="heroLeft">
             <h1 class="heroTitle">
-              <span id="typeTarget"></span><span class="typeCursor"></span>
+              Make Your Brand
+              <span class="line2"><span id="typeTarget"></span><span class="typeCursor"></span></span>
             </h1>
 
             <p class="heroSub">
@@ -741,7 +709,7 @@ footer{
     </div>
   </section>
 
-  <!-- ✅ OUR CLIENTS (BEFORE RECENT WORKS) -->
+  <!-- ✅ CLIENTS (MOVED ABOVE FEATURED PROJECT) -->
   <section class="section" id="clients">
     <div class="container">
       <div class="kicker" style="text-align:center">Our Clients</div>
@@ -753,8 +721,8 @@ footer{
     </div>
   </section>
 
-  <!-- RECENT WORK + ABOUT -->
-  <section class="section" id="recent">
+  <!-- ABOUT + RECENT WORK -->
+  <section class="section">
     <div class="container grid2">
 
       <div class="card">
@@ -788,39 +756,59 @@ footer{
     </div>
   </section>
 
-  <!-- ✅ OUR WORKS (COVERFLOW) -->
+  <!-- WORKS -->
   <section class="section" id="works">
     <div class="container">
-      <div class="kicker">Our Works</div>
-      <h2 style="margin:10px 0 16px">Projects</h2>
 
-      <div class="coverflowWrap">
-        <div class="coverflowStage">
-          <div id="coverflow">
-            <!-- Add/replace covers here -->
-            <a class="cfItem" href="https://www.behance.net/gallery/203401201/First-Steps-Schools-Brandfolio/modules/1154151037" target="_blank" rel="noopener"
-               data-cover="assets/images/work-1.jpg" data-title="First Steps Schools – Brandfolio" data-sub="Brand identity & presentation"></a>
-
-            <a class="cfItem" href="https://www.behance.net/gallery/202975793/Dream-Fashions-Logo-Brand-Identity" target="_blank" rel="noopener"
-               data-cover="assets/images/work-2.jpg" data-title="Dream Fashions – Logo & Identity" data-sub="Logo, brand system"></a>
-
-            <a class="cfItem" href="https://www.behance.net/gallery/202964729/Royalin-Sleeping-Solutions" target="_blank" rel="noopener"
-               data-cover="assets/images/work-3.jpg" data-title="Royalin – Sleeping Solutions" data-sub="Brand & creatives"></a>
-          </div>
+      <div class="worksHead">
+        <div>
+          <div class="kicker">Our Works</div>
+          <h2 style="margin:10px 0 0">Projects</h2>
         </div>
 
-        <div class="coverflowControls">
-          <div class="smallHint">Use ← → keys or swipe</div>
-          <div class="arrowRow">
-            <button class="arrowBtn" id="cfPrev" aria-label="Previous">‹</button>
-            <button class="arrowBtn" id="cfNext" aria-label="Next">›</button>
-          </div>
+        <div class="arrowRow">
+          <button class="arrowBtn" id="prevBtn" aria-label="Previous">‹</button>
+          <button class="arrowBtn" id="nextBtn" aria-label="Next">›</button>
         </div>
       </div>
+
+      <div class="slider">
+        <div class="track" id="workTrack">
+
+          <a class="workCard" target="_blank" rel="noopener"
+             href="https://www.behance.net/gallery/203401201/First-Steps-Schools-Brandfolio/modules/1154151037">
+            <div class="thumb"><img src="assets/images/work-1.jpg" alt="" onerror="this.remove()"></div>
+            <div class="workBody">
+              <p class="workTitle">First Steps Schools – Brandfolio</p>
+              <p class="workMeta">Brand identity & presentation</p>
+            </div>
+          </a>
+
+          <a class="workCard" target="_blank" rel="noopener"
+             href="https://www.behance.net/gallery/202975793/Dream-Fashions-Logo-Brand-Identity">
+            <div class="thumb"><img src="assets/images/work-2.jpg" alt="" onerror="this.remove()"></div>
+            <div class="workBody">
+              <p class="workTitle">Dream Fashions – Logo & Identity</p>
+              <p class="workMeta">Logo, brand system</p>
+            </div>
+          </a>
+
+          <a class="workCard" target="_blank" rel="noopener"
+             href="https://www.behance.net/gallery/202964729/Royalin-Sleeping-Solutions">
+            <div class="thumb"><img src="assets/images/work-3.jpg" alt="" onerror="this.remove()"></div>
+            <div class="workBody">
+              <p class="workTitle">Royalin – Sleeping Solutions</p>
+              <p class="workMeta">Brand & creatives</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT / QUOTE -->
   <section class="section" id="contact">
     <div class="container card">
       <div class="quoteRow">
@@ -829,12 +817,22 @@ footer{
           <h2 style="margin:10px 0 8px">Get a personalized quote that fits your goals.</h2>
           <div class="smallNote">WhatsApp: +91 82813 21607 · Email: info@creatocrew.com · Web: www.creatocrew.com</div>
 
+          <!-- ✅ Social icons (you will add icon files) -->
           <div class="socialRow">
-            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/icons/instagram.png" alt=""></a>
-            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><img src="assets/icons/facebook.png" alt=""></a>
-            <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="assets/icons/linkedin.png" alt=""></a>
-            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><img src="assets/icons/youtube.png" alt=""></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+              <img src="assets/icons/instagram.png" alt="">
+            </a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
+              <img src="assets/icons/facebook.png" alt="">
+            </a>
+            <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <img src="assets/icons/linkedin.png" alt="">
+            </a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube">
+              <img src="assets/icons/youtube.png" alt="">
+            </a>
           </div>
+
         </div>
 
         <a class="quotePill"
@@ -891,62 +889,17 @@ const drawer = document.getElementById("drawer");
 menuBtn?.addEventListener("click", ()=> drawer.classList.toggle("show"));
 drawer?.querySelectorAll("a").forEach(a=> a.addEventListener("click", ()=> drawer.classList.remove("show")));
 
-/* ✅ TYPEWRITER LOOP (every ~10 seconds) */
+/* TYPEWRITER (keep yours, you said you’ll replace later) */
 const typeTarget = document.getElementById("typeTarget");
-const fullText = "Make Your Brand Impossible to Ignore!";
-const TYPE_SPEED = 55;
-const DELETE_SPEED = 28;
-const HOLD_AFTER_TYPED = 900;
-const HOLD_AFTER_DELETED = 650;
-const LOOP_GAP = 10000; // your request: loop after every 10s
-
-let tIndex = 0;
-let deleting = false;
-let lastLoopStart = performance.now();
-
-function typeLoop(){
+const phrase = "Impossible to Ignore!";
+let idx = 0;
+function type(){
   if(!typeTarget) return;
-
-  const now = performance.now();
-  const elapsed = now - lastLoopStart;
-
-  // Ensure ~10s per cycle (not perfect, but consistent enough)
-  // We restart cycle when fully deleted and 10s elapsed.
-  if(!deleting && tIndex === 0 && elapsed < 50){
-    // fresh cycle
-  }
-
-  if(!deleting){
-    typeTarget.textContent = fullText.slice(0, tIndex);
-    tIndex++;
-
-    if(tIndex > fullText.length){
-      tIndex = fullText.length;
-      setTimeout(()=>{ deleting = true; typeLoop(); }, HOLD_AFTER_TYPED);
-      return;
-    }
-    setTimeout(typeLoop, TYPE_SPEED);
-  } else {
-    typeTarget.textContent = fullText.slice(0, tIndex);
-    tIndex--;
-
-    if(tIndex < 0){
-      tIndex = 0;
-      deleting = false;
-
-      // wait until total is 10 seconds since last start
-      const wait = Math.max(LOOP_GAP - (performance.now() - lastLoopStart), HOLD_AFTER_DELETED);
-      setTimeout(()=>{
-        lastLoopStart = performance.now();
-        typeLoop();
-      }, wait);
-      return;
-    }
-    setTimeout(typeLoop, DELETE_SPEED);
-  }
+  typeTarget.textContent += phrase[idx] || "";
+  idx++;
+  if(idx <= phrase.length) setTimeout(type, 70);
 }
-lastLoopStart = performance.now();
-typeLoop();
+type();
 
 /* PILLS toggle */
 document.querySelectorAll(".service-pill").forEach(pill=>{
@@ -977,110 +930,14 @@ if(marquee){
       marquee.appendChild(img);
     }
   };
-  make(); make();
+  make();
+  make();
 }
 
-/* ✅ COVERFLOW */
-(function(){
-  const items = Array.from(document.querySelectorAll("#coverflow .cfItem"));
-  if(!items.length) return;
-
-  // render content inside anchors
-  items.forEach((el)=>{
-    const cover = el.getAttribute("data-cover");
-    const title = el.getAttribute("data-title") || "";
-    const sub = el.getAttribute("data-sub") || "";
-
-    el.innerHTML = `
-      <img class="cfThumb" src="${cover}" alt="">
-      <div class="cfOverlay"></div>
-      <div class="cfMeta"><b>${title}</b>${sub}</div>
-    `;
-
-    // if image missing, keep a nice fallback
-    const img = el.querySelector("img");
-    img.onerror = () => {
-      img.remove();
-      el.style.background = `
-        radial-gradient(700px 240px at 20% 20%, rgba(140,0,255,.24), transparent 55%),
-        radial-gradient(700px 240px at 90% 80%, rgba(180,70,255,.18), transparent 60%),
-        rgba(0,0,0,.35)
-      `;
-    };
-  });
-
-  let index = Math.floor(items.length / 2);
-
-  const OFFSET_X = 75;     // % translateX steps
-  const ROT = 45;         // degrees
-  const Z_PUSH = 170;     // px translateZ for center
-  const SIDE_Z = 0;       // optional side depth
-
-  function render(){
-    items.forEach((el,i)=>{
-      let t = "";
-      let z = 10;
-
-      if(i < index){
-        const d = index - i;
-        t = `translateX(${-OFFSET_X*d}%) rotateY(${ROT}deg) translateZ(${SIDE_Z}px)`;
-        z = 10 + i;
-        el.style.filter = "brightness(.70) saturate(.85)";
-      } else if(i === index){
-        t = `rotateY(0deg) translateZ(${Z_PUSH}px)`;
-        z = 100;
-        el.style.filter = "brightness(1) saturate(1)";
-      } else {
-        const d = i - index;
-        t = `translateX(${OFFSET_X*d}%) rotateY(${-ROT}deg) translateZ(${SIDE_Z}px)`;
-        z = 10 + (items.length - i);
-        el.style.filter = "brightness(.70) saturate(.85)";
-      }
-
-      el.style.transform = t;
-      el.style.zIndex = z;
-      el.setAttribute("aria-hidden", i === index ? "false" : "true");
-    });
-  }
-
-  function prev(){ if(index > 0){ index--; render(); } }
-  function next(){ if(index < items.length-1){ index++; render(); } }
-
-  document.getElementById("cfPrev")?.addEventListener("click", prev);
-  document.getElementById("cfNext")?.addEventListener("click", next);
-
-  document.addEventListener("keydown", (e)=>{
-    if(e.key === "ArrowLeft") prev();
-    if(e.key === "ArrowRight") next();
-  });
-
-  // swipe support
-  let startX = null;
-  const stage = document.querySelector(".coverflowStage");
-  stage?.addEventListener("touchstart",(e)=>{ startX = e.touches[0].clientX; },{passive:true});
-  stage?.addEventListener("touchend",(e)=>{
-    if(startX == null) return;
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - startX;
-    if(Math.abs(diff) > 40){
-      if(diff > 0) prev(); else next();
-    }
-    startX = null;
-  });
-
-  // click: bring clicked card to center if not centered
-  items.forEach((el,i)=>{
-    el.addEventListener("click",(e)=>{
-      // if centered, let link open
-      if(i === index) return;
-      e.preventDefault();
-      index = i;
-      render();
-    });
-  });
-
-  render();
-}());
+/* WORKS slider arrows */
+const track = document.getElementById("workTrack");
+document.getElementById("prevBtn")?.addEventListener("click", ()=> track?.scrollBy({left:-340, behavior:"smooth"}));
+document.getElementById("nextBtn")?.addEventListener("click", ()=> track?.scrollBy({left:340, behavior:"smooth"}));
 </script>
 
 </body>
