@@ -15,9 +15,7 @@
   --p2:rgba(180,70,255,.24);
   --p3:rgba(110,0,220,.18);
 
-  --container: 1200px;
-  --radius: 26px;
-  --shadow: rgba(0,0,0,.62);
+  --container:1200px;
 }
 
 *{box-sizing:border-box}
@@ -44,7 +42,7 @@ a{color:inherit}
 }
 
 /* =========================
-   TOP NAV (GLASS)
+   NAVBAR (glass)
 ========================= */
 header{
   position:fixed; inset:0 0 auto 0;
@@ -73,7 +71,6 @@ header{
   font-weight:750;
   letter-spacing:.02em;
   color:rgba(255,255,255,.92);
-  text-shadow:0 1px 2px rgba(0,0,0,.35);
 }
 .navRight{
   display:flex;
@@ -98,8 +95,6 @@ header{
   background:rgba(255,255,255,.06);
   color:#fff;
   cursor:pointer;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 .drawer{
   display:none;
@@ -119,6 +114,7 @@ header{
 
 /* =========================
    WHATSAPP CTA (BASE)
+   IMPORTANT: no underline, aligned, bold
 ========================= */
 .waCtaPill{
   --pill-h: 52px;
@@ -135,14 +131,14 @@ header{
   border-radius:999px;
   white-space:nowrap;
 
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
   font-size:14px;
-  font-weight:750;               /* FIX: boldness */
+  font-weight:800;              /* bold */
   letter-spacing:.2px;
-  line-height:1;                 /* FIX: vertical alignment */
+  line-height:1;                /* no baseline weirdness */
+
   color:#fff;
-  text-decoration:none !important; /* FIX: remove underline */
-  border-bottom:none !important;   /* FIX: if any reset applies */
+  text-decoration:none !important; /* kill underline */
+  border-bottom:0 !important;      /* kill underline hacks */
 
   background: linear-gradient(120deg,#6f3fc8,#4a1f7a,#9c5cff,#5b2d90);
   background-size: 300% 300%;
@@ -152,20 +148,18 @@ header{
     0 10px 28px rgba(0,0,0,.45),
     inset 0 1px 0 rgba(255,255,255,.18);
 
-  border: 1px solid rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.12);
   cursor:pointer;
   position:relative;
+  transform: translateZ(0);
 }
-.waCtaPill *{ text-decoration:none !important; } /* FIX: kills underline on inner spans */
+.waCtaPill *{ text-decoration:none !important; } /* also kill underline inside */
 
 @keyframes pillGradient{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
-
-.waCtaPill:hover{ filter:brightness(1.06); transform:translateY(-1px); }
-.waCtaPill:active{ transform:translateY(0); }
 
 .waIcon{
   width: var(--icon-size);
@@ -182,7 +176,7 @@ header{
   width: 18px;
   height: 18px;
   color: #25d366;
-  animation: waPulse 2.6s ease-in-out infinite; /* calmer */
+  animation: waPulse 2.8s ease-in-out infinite;
 }
 @keyframes waPulse{
   0%   { transform: scale(1); opacity: 1; }
@@ -191,8 +185,7 @@ header{
 }
 
 /* =========================
-   NAVBAR WhatsApp (small + liquid)
-   Only affects .waCtaPill--nav
+   NAVBAR WhatsApp (small + liquid) ONLY
 ========================= */
 .waCtaPill--nav{
   --pill-h: 34px;
@@ -214,7 +207,6 @@ header{
     inset 0 1px 0 rgba(255,255,255,.18),
     inset 0 -10px 18px rgba(0,0,0,.28);
 }
-
 .waCtaPill--nav::before{
   content:"";
   position:absolute;
@@ -231,12 +223,12 @@ header{
       rgba(180,70,255,0) 75%);
   filter: blur(12px);
   opacity:.85;
-  animation: navLiquidDrift 6.2s ease-in-out infinite;
+  animation: navLiquidDrift 6.4s ease-in-out infinite;
 }
 @keyframes navLiquidDrift{
-  0%   { transform: translateX(-18px) translateY(6px) scale(1.02) rotate(0.001deg); }
-  50%  { transform: translateX(16px)  translateY(-6px) scale(1.06) rotate(0.001deg); }
-  100% { transform: translateX(-18px) translateY(6px) scale(1.02) rotate(0.001deg); }
+  0%   { transform: translateX(-18px) translateY(6px) scale(1.02); }
+  50%  { transform: translateX(16px)  translateY(-6px) scale(1.06); }
+  100% { transform: translateX(-18px) translateY(6px) scale(1.02); }
 }
 .waCtaPill--nav::after{
   content:"";
@@ -246,7 +238,7 @@ header{
   opacity:.9;
 }
 .waCtaPill--nav > *{ position:relative; z-index:2; }
-.waCtaPill--nav .waIcon svg{ width:14px; height:14px; animation-duration:2.8s; }
+.waCtaPill--nav .waIcon svg{ width:14px; height:14px; }
 
 /* =========================
    HERO
@@ -262,14 +254,11 @@ header{
 .heroGrid{
   display:grid;
   grid-template-columns: 1.15fr .85fr;
-  gap:0;
   min-height:520px;
 }
 .heroLeft{
   padding:34px 28px;
   position:relative;
-  z-index:2;
-  overflow:hidden;
 }
 .heroTitle{
   font-size:52px;
@@ -286,20 +275,20 @@ header{
   animation:blink 1s steps(2,end) infinite;
 }
 @keyframes blink{50%{opacity:0}}
+
 .heroSub{
   max-width:56ch;
   color:var(--muted);
-  margin:14px 0 18px 0;
+  margin:14px 0 0 0;
   line-height:1.65;
   font-size:15px;
 }
+
 .heroRight{
   position:relative;
-  min-height:520px;
   background:rgba(255,255,255,.03);
 }
-.heroRight video,
-.heroRight img{
+.heroRight video{
   width:100%;
   height:100%;
   object-fit:cover;
@@ -317,41 +306,15 @@ header{
     rgba(5,5,10,.25) 62%,
     rgba(5,5,10,0) 100%);
 }
-.heroRight::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  box-shadow: inset 1px 0 0 rgba(255,255,255,.10);
-  opacity:.55;
-}
 
 /* =========================
-   SECTION CARDS
-========================= */
-.grid2{display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;}
-.grid2.reverse{grid-template-columns: .9fr 1.1fr;}
-.card{
-  border-radius:26px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.05);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 18px 70px rgba(0,0,0,.55);
-  padding:22px;
-}
-.card p{color:var(--muted); line-height:1.65; margin:0}
-
-/* =========================
-   "WHAT WE DO" (services cards with images)
-   Image sizes:
-   - Put images in: assets/images/services/
-   - Recommended: 1200x675 (16:9) OR minimum 900x506
-   Files expected:
-   - creatives.jpg
-   - marketing.jpg
-   - branding.jpg
-   - web.jpg
+   SERVICES CARDS (What we do)
+   Put images here:
+   assets/images/services/creatives.jpg
+   assets/images/services/marketing.jpg
+   assets/images/services/branding.jpg
+   assets/images/services/web.jpg
+   Recommended size: 1200x675 (16:9)
 ========================= */
 .servicesGrid{
   display:grid;
@@ -370,22 +333,16 @@ header{
   min-height:420px;
   display:flex;
   flex-direction:column;
-  position:relative;
 }
-.svcMedia{
-  height:170px;
-  position:relative;
-}
+.svcMedia{height:170px; position:relative;}
 .svcMedia img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+  width:100%; height:100%;
+  object-fit:cover; display:block;
 }
 .svcMedia::after{
   content:"";
   position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.55) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.60) 100%);
 }
 .svcBody{
   padding:18px 18px 16px;
@@ -396,7 +353,7 @@ header{
 }
 .svcTitle{
   font-size:22px;
-  font-weight:800;
+  font-weight:850;
   margin:0;
 }
 .svcList{
@@ -406,58 +363,35 @@ header{
   line-height:1.75;
 }
 .svcList li{margin:4px 0}
-.svcFooter{
-  margin-top:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
+
 .readMore{
+  margin-top:auto;
   display:inline-flex;
   align-items:center;
   gap:8px;
-  margin-top:6px;
-  font-weight:750;
+  font-weight:800;
   color:#d3b0ff;
-  text-decoration:none !important; /* FIX underline */
-  border-bottom:none !important;
+  text-decoration:none !important;
 }
 .readMore:hover{ text-decoration:underline !important; }
-.readMore .arrow{
-  display:inline-block;
-  transform:translateY(1px);
-}
 
 /* =========================
-   Scroll-trigger reveal (left/right)
-   "suspenseful", not too fast
+   ABOUT + RECENT
 ========================= */
-.reveal{
-  opacity:0;
-  transform: translateY(16px);
-  filter: blur(6px);
-  transition:
-    opacity 900ms ease,
-    transform 1100ms cubic-bezier(.16,1,.3,1),
-    filter 1100ms ease;
-  will-change: transform, opacity, filter;
-}
-.reveal[data-dir="left"]{ transform: translateX(-46px) translateY(10px); }
-.reveal[data-dir="right"]{ transform: translateX(46px) translateY(10px); }
-.reveal.is-inview{
-  opacity:1;
-  transform: translateX(0) translateY(0);
-  filter: blur(0);
-}
-.revealDelay0{ transition-delay: 80ms; }
-.revealDelay1{ transition-delay: 180ms; }
-.revealDelay2{ transition-delay: 280ms; }
-.revealDelay3{ transition-delay: 380ms; }
+.grid2{display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;}
+.grid2.reverse{grid-template-columns: .9fr 1.1fr;}
 
-/* =========================
-   RECENT WORK iframe slider
-========================= */
+.card{
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 70px rgba(0,0,0,.55);
+  padding:22px;
+}
+.card p{color:var(--muted); line-height:1.65; margin:0}
+
 .previewSlider{
   position:relative;
   height:360px;
@@ -468,10 +402,8 @@ header{
   box-shadow: 0 18px 70px rgba(0,0,0,.55);
 }
 .previewSlider iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+  position:absolute; inset:0;
+  width:100%; height:100%;
   border:0;
   opacity:0;
   transition:opacity 1.2s ease;
@@ -479,40 +411,8 @@ header{
 .previewSlider iframe.active{ opacity:1; }
 
 /* =========================
-   CLIENTS MARQUEE
+   WORKS GRID
 ========================= */
-.clientsWrap{
-  border-radius:26px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.04);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  overflow:hidden;
-  padding:18px 0;
-}
-.marquee{
-  display:flex;
-  gap:34px;
-  align-items:center;
-  width:max-content;
-  animation:marquee 55s linear infinite;
-  padding:0 18px;
-}
-@keyframes marquee{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
-}
-.clientLogo{
-  height:54px;
-  width:auto;
-  opacity:.88;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-}
-
-/* =========================
-   WORKS (EMBED GRID)
-========================= */
-.worksHead{display:flex; align-items:end; justify-content:space-between; gap:16px;}
 .embedGrid{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));
@@ -527,34 +427,6 @@ header{
   background:rgba(0,0,0,.25);
   box-shadow: 0 18px 70px rgba(0,0,0,.55);
 }
-
-/* =========================
-   DETAIL SECTIONS
-========================= */
-.detailCard{
-  border-radius:26px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.05);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 18px 70px rgba(0,0,0,.55);
-  padding:24px;
-}
-.detailCard h2{margin:6px 0 10px}
-.detailGrid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-  gap:16px;
-  margin-top:14px;
-}
-.detailItem{
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.18);
-  padding:14px;
-}
-.detailItem b{display:block; margin-bottom:6px}
-.detailItem p{margin:0; color:var(--muted); line-height:1.6; font-size:14px}
 
 /* =========================
    CONTACT
@@ -583,15 +455,12 @@ footer{
   grid-template-columns: 1.2fr 1fr 1fr;
   gap:18px;
 }
-.footerTitle{font-weight:750; margin:0 0 10px 0}
+.footerTitle{font-weight:800; margin:0 0 10px 0}
 .footerText{color:var(--muted); line-height:1.65; margin:0}
 .footerList{margin:0; padding:0; list-style:none; color:var(--muted); line-height:1.9; font-size:14px}
 .footerList a{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-  color:var(--muted);
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none; color:var(--muted);
 }
 .footerList a:hover{color:#fff}
 .footerList img{width:18px;height:18px;opacity:.9}
@@ -610,26 +479,49 @@ footer{
 .copy{margin-top:18px; color:rgba(255,255,255,.55); font-size:13px}
 
 /* =========================
+   Scroll reveal (suspense)
+========================= */
+.reveal{
+  opacity:0;
+  filter: blur(8px);
+  transform: translateY(18px);
+  transition:
+    opacity 950ms ease,
+    transform 1150ms cubic-bezier(.16,1,.3,1),
+    filter 1150ms ease;
+  will-change: transform, opacity, filter;
+}
+.reveal[data-dir="left"]{ transform: translateX(-54px) translateY(12px); }
+.reveal[data-dir="right"]{ transform: translateX(54px) translateY(12px); }
+.reveal.is-inview{
+  opacity:1;
+  filter: blur(0);
+  transform: translateX(0) translateY(0);
+}
+.revealDelay0{transition-delay:120ms}
+.revealDelay1{transition-delay:220ms}
+.revealDelay2{transition-delay:320ms}
+.revealDelay3{transition-delay:420ms}
+
+/* =========================
    RESPONSIVE
 ========================= */
-@media (max-width: 1100px){
-  .servicesGrid{grid-template-columns:repeat(2, 1fr)}
+@media (max-width:1100px){
+  .servicesGrid{grid-template-columns:repeat(2,1fr)}
 }
-@media (max-width: 980px){
+@media (max-width:980px){
   .heroGrid{grid-template-columns:1fr; min-height:auto}
   .heroTitle{font-size:44px}
   .heroRight{min-height:320px}
   .grid2, .grid2.reverse{grid-template-columns:1fr}
   .footerGrid{grid-template-columns:1fr}
 }
-@media (max-width: 760px){
+@media (max-width:760px){
   .navlinks{display:none}
   .menuBtn{display:inline-grid; place-items:center}
   .drawer.show{display:block}
-  .previewSlider{height:320px}
-  .embedGrid iframe{height:300px}
   .servicesGrid{grid-template-columns:1fr}
-  .waCtaPill--nav{display:none} /* hide big CTA in navbar on small screens (optional) */
+  .embedGrid iframe{height:300px}
 }
 </style>
 </head>
@@ -651,7 +543,7 @@ footer{
         <a href="#contact">Contact</a>
       </nav>
 
-      <!-- NAV WhatsApp (smaller liquid) -->
+      <!-- NAV WhatsApp (small liquid) -->
       <a class="waCtaPill waCtaPill--nav"
          href="https://api.whatsapp.com/send/?phone=918281321607&text=Hi%2C+I%E2%80%99m+interested+in+your+services.+Could+you+please+share+a+quotation%3F"
          target="_blank" rel="noopener">
@@ -675,7 +567,6 @@ footer{
     <a href="#services">Services</a>
     <a href="#works">Works</a>
     <a href="#contact">Contact</a>
-    <!-- mobile whatsapp shortcut -->
     <a href="https://api.whatsapp.com/send/?phone=918281321607&text=Hi%2C+I%E2%80%99m+interested+in+your+services.+Could+you+please+share+a+quotation%3F"
        target="_blank" rel="noopener">WhatsApp Quote</a>
   </div>
@@ -688,19 +579,15 @@ footer{
     <div class="container">
       <div class="heroCard">
         <div class="heroGrid">
-
           <div class="heroLeft">
             <h1 class="heroTitle">
               Make Your Brand
               <span class="line2"><span id="typeTarget"></span><span class="typeCursor"></span></span>
             </h1>
-
             <p class="heroSub">
               CreatoCrew helps brands grow with smart strategy, thoughtful design, and effective execution —
               with creatives that look premium and perform.
             </p>
-
-            <p class="smallNote">Scroll down — services reveal with a suspense effect.</p>
           </div>
 
           <div class="heroRight" aria-label="Chess background video">
@@ -708,19 +595,18 @@ footer{
               <source src="assets/video/chess.mp4" type="video/mp4">
             </video>
           </div>
-
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES (What we do) -->
+  <!-- SERVICES -->
   <section class="section" id="services">
     <div class="container">
       <div class="kicker">Services</div>
       <h2 style="margin:10px 0 0; font-size:40px; letter-spacing:-.02em;">What we do</h2>
 
-      <div class="servicesGrid" aria-label="Services cards">
+      <div class="servicesGrid">
 
         <article class="svcCard reveal revealDelay0" data-dir="left">
           <div class="svcMedia">
@@ -735,9 +621,7 @@ footer{
               <li>Motion graphics & animated ads</li>
               <li>Copywriting for posts & campaigns</li>
             </ul>
-            <div class="svcFooter">
-              <a class="readMore" href="#creatives">Read more <span class="arrow">→</span></a>
-            </div>
+            <a class="readMore" href="#creatives">Read more →</a>
           </div>
         </article>
 
@@ -753,9 +637,7 @@ footer{
               <li>SEO / SEM for discoverability</li>
               <li>Google Business Profile & local ranking</li>
             </ul>
-            <div class="svcFooter">
-              <a class="readMore" href="#digital-marketing">Read more <span class="arrow">→</span></a>
-            </div>
+            <a class="readMore" href="#digital-marketing">Read more →</a>
           </div>
         </article>
 
@@ -772,9 +654,7 @@ footer{
               <li>Packaging & print creatives</li>
               <li>Rebranding & modernization</li>
             </ul>
-            <div class="svcFooter">
-              <a class="readMore" href="#branding">Read more <span class="arrow">→</span></a>
-            </div>
+            <a class="readMore" href="#branding">Read more →</a>
           </div>
         </article>
 
@@ -790,35 +670,20 @@ footer{
               <li>SEO-friendly structure</li>
               <li>Conversion-focused sections & CTA</li>
             </ul>
-            <div class="svcFooter">
-              <a class="readMore" href="#web-design">Read more <span class="arrow">→</span></a>
-            </div>
+            <a class="readMore" href="#web-design">Read more →</a>
           </div>
         </article>
 
       </div>
 
       <p class="smallNote" style="margin-top:12px;">
-        <b>Images:</b> Put these in <code>assets/images/services/</code> as
-        <code>creatives.jpg</code>, <code>marketing.jpg</code>, <code>branding.jpg</code>, <code>web.jpg</code>.
+        <b>Service images:</b> put 4 images in <code>assets/images/services/</code>.
         Recommended size: <b>1200×675</b> (16:9).
       </p>
     </div>
   </section>
 
-  <!-- CLIENTS -->
-  <section class="section" id="clients">
-    <div class="container">
-      <div class="kicker" style="text-align:center">Our Clients</div>
-      <h2 style="text-align:center; margin:10px 0 18px">Trusted by brands</h2>
-
-      <div class="clientsWrap">
-        <div class="marquee" id="marquee"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT (LEFT) + RECENT WORK (RIGHT) -->
+  <!-- ABOUT + RECENT -->
   <section class="section">
     <div class="container grid2 reverse">
 
@@ -855,66 +720,44 @@ footer{
     </div>
   </section>
 
-  <!-- DETAIL SECTIONS -->
+  <!-- DETAIL ANCHORS (kept simple so Read more scroll works) -->
   <section class="section" id="creatives">
-    <div class="container detailCard reveal" data-dir="left">
-      <div class="kicker">Service Details</div>
-      <h2>Creatives</h2>
-      <div class="detailGrid">
-        <div class="detailItem"><b>Posters</b><p>Attractive designs for daily posts, offers, trends, and awareness messages that quickly catch attention.</p></div>
-        <div class="detailItem"><b>Carousels</b><p>Multi-step slides that explain your message clearly and increase engagement.</p></div>
-        <div class="detailItem"><b>Video Reels</b><p>Short, high-impact reels and video content for social media. We also help with planning and direction to match your brand and improve results.</p></div>
-        <div class="detailItem"><b>Motion Graphics</b><p>Animated elements, transitions, and explainers that bring ideas to life with energy and precision.</p></div>
-        <div class="detailItem"><b>Copywriting</b><p>Clear and effective text for your posts, ads, and marketing messages.</p></div>
-      </div>
+    <div class="container card reveal" data-dir="left">
+      <div class="kicker">Service</div>
+      <h2 style="margin:10px 0 10px">Creatives</h2>
+      <p>Posters, carousels, reels, motion graphics, and copywriting designed to catch attention and build trust.</p>
     </div>
   </section>
 
   <section class="section" id="digital-marketing">
-    <div class="container detailCard reveal" data-dir="right">
-      <div class="kicker">Service Details</div>
-      <h2>Digital Marketing</h2>
-      <div class="detailGrid">
-        <div class="detailItem"><b>Social Media Management</b><p>Daily posts, engagement, and updates with a clear calendar and strategy.</p></div>
-        <div class="detailItem"><b>SEO / SEM</b><p>Search ranking, keyword optimisation, and targeted ad spend that brings real leads.</p></div>
-        <div class="detailItem"><b>Google Business Profile</b><p>Creation, optimization, updates, and ranking support to increase local enquiries.</p></div>
-      </div>
+    <div class="container card reveal" data-dir="right">
+      <div class="kicker">Service</div>
+      <h2 style="margin:10px 0 10px">Digital Marketing</h2>
+      <p>Social media management, SEO/SEM, and Google Business Profile optimisation to drive visibility and leads.</p>
     </div>
   </section>
 
   <section class="section" id="branding">
-    <div class="container detailCard reveal" data-dir="left">
-      <div class="kicker">Service Details</div>
-      <h2>Branding</h2>
-      <div class="detailGrid">
-        <div class="detailItem"><b>Brand Identity Design</b><p>Logo, visuals, palette, and clear guidelines for consistent usage across print and digital.</p></div>
-        <div class="detailItem"><b>Brand Strategy</b><p>Messaging, story, communication lines, and direction for how your brand should look and speak.</p></div>
-        <div class="detailItem"><b>Stationery & Collateral</b><p>Business cards, letterheads, brochures, menus, and other essential branded materials.</p></div>
-        <div class="detailItem"><b>Packaging Design</b><p>Packaging that strengthens identity and improves customer experience.</p></div>
-        <div class="detailItem"><b>Rebranding</b><p>Modern refresh of your existing brand to match your current goals.</p></div>
-      </div>
+    <div class="container card reveal" data-dir="left">
+      <div class="kicker">Service</div>
+      <h2 style="margin:10px 0 10px">Branding</h2>
+      <p>Brand identity, strategy, collateral, packaging, and rebranding to make your business consistent and memorable.</p>
     </div>
   </section>
 
   <section class="section" id="web-design">
-    <div class="container detailCard reveal" data-dir="right">
-      <div class="kicker">Service Details</div>
-      <h2>Web Design</h2>
-      <div class="detailGrid">
-        <div class="detailItem"><b>UI/UX + Website Build</b><p>Clean, modern websites with intuitive UI/UX, SEO-friendly structure, and conversion-focused sections.</p></div>
-      </div>
+    <div class="container card reveal" data-dir="right">
+      <div class="kicker">Service</div>
+      <h2 style="margin:10px 0 10px">Web Design</h2>
+      <p>Clean, modern websites crafted with intuitive UI/UX and SEO-friendly structure, built for clarity and high conversion.</p>
     </div>
   </section>
 
   <!-- WORKS -->
   <section class="section" id="works">
     <div class="container">
-      <div class="worksHead">
-        <div>
-          <div class="kicker">Our Works</div>
-          <h2 style="margin:10px 0 0">Projects</h2>
-        </div>
-      </div>
+      <div class="kicker">Our Works</div>
+      <h2 style="margin:10px 0 0">Projects</h2>
 
       <div class="embedGrid" aria-label="Project embeds">
         <iframe src="https://drive.google.com/file/d/1u90Oc-15twM4A8oG-xbmABmokROkMP3g/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
@@ -923,13 +766,6 @@ footer{
         <iframe src="https://drive.google.com/file/d/13gxrHhZtp4lNZsVNZJ4laNE7YeDIPz6C/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
         <iframe src="https://drive.google.com/file/d/1aEmtfAkGcAgT-sV9w3c0aNW0PUEhmFR-/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
         <iframe src="https://drive.google.com/file/d/1050duY7VHVYpxx23YJouRYBow7JCbtju/preview" allow="autoplay; encrypted-media" loading="lazy"></iframe>
-
-        <iframe src="https://www.behance.net/embed/project/202970317?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <iframe src="https://www.behance.net/embed/project/203024825?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <iframe src="https://www.behance.net/embed/project/202971449?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <iframe src="https://www.behance.net/embed/project/202967245?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <iframe src="https://www.behance.net/embed/project/202964729?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        <iframe src="https://www.behance.net/embed/project/203711381?ilo0=1" allowfullscreen allow="clipboard-write" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
   </section>
@@ -944,7 +780,7 @@ footer{
           <div class="smallNote">Tap WhatsApp to send your request instantly.</div>
         </div>
 
-        <!-- Main WhatsApp button (kept big) -->
+        <!-- CONTACT WhatsApp (base only: not liquid) -->
         <a class="waCtaPill"
            href="https://api.whatsapp.com/send/?phone=918281321607&text=Hi%2C+I%E2%80%99m+interested+in+your+services.+Could+you+please+share+a+quotation%3F"
            target="_blank" rel="noopener">
@@ -1048,32 +884,12 @@ drawer?.querySelectorAll("a").forEach(a=> a.addEventListener("click", ()=> drawe
 const typeTarget = document.getElementById("typeTarget");
 const phrase = "Impossible to Ignore!";
 let idx = 0;
-function type(){
+(function type(){
   if(!typeTarget) return;
   typeTarget.textContent = phrase.slice(0, idx);
   idx++;
-  if(idx <= phrase.length){
-    setTimeout(type, 68);
-  }
-}
-type();
-
-/* CLIENT LOGOS (auto-load client-1.png ... client-23.png) */
-const marquee = document.getElementById("marquee");
-if(marquee){
-  const total = 23;
-  const make = () => {
-    for(let i=1;i<=total;i++){
-      const img = document.createElement("img");
-      img.className = "clientLogo";
-      img.src = `assets/images/client-${i}.png`;
-      img.alt = `Client ${i}`;
-      img.onerror = () => img.remove();
-      marquee.appendChild(img);
-    }
-  };
-  make(); make();
-}
+  if(idx <= phrase.length) setTimeout(type, 70);
+})();
 
 /* Recent Work auto-slide iframes */
 const rwSlides = document.querySelectorAll(".previewSlider .slide");
@@ -1085,7 +901,7 @@ setInterval(()=>{
   rwSlides[s].classList.add("active");
 }, 5200);
 
-/* Scroll-trigger reveal (suspense, not speedy) */
+/* Scroll-trigger reveal (suspenseful, not too fast) */
 const revealEls = document.querySelectorAll(".reveal");
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
@@ -1096,7 +912,7 @@ const io = new IntersectionObserver((entries)=>{
   });
 },{
   threshold: 0.18,
-  rootMargin: "0px 0px -8% 0px"
+  rootMargin: "0px 0px -10% 0px"
 });
 revealEls.forEach(el => io.observe(el));
 </script>
